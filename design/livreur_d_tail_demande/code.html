@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Détail Demande - WONA</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Shared Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed": "#eee0d3",
+                    "tertiary-container": "#00a0ea",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-highest": "#f3dfd4",
+                    "on-tertiary-fixed-variant": "#004b71",
+                    "on-primary-fixed": "#311300",
+                    "on-tertiary-fixed": "#001e30",
+                    "tertiary": "#006494",
+                    "on-secondary-fixed": "#211a12",
+                    "inverse-surface": "#3a2e27",
+                    "on-error-container": "#93000a",
+                    "surface-variant": "#f3dfd4",
+                    "error-container": "#ffdad6",
+                    "on-primary-container": "#4f2300",
+                    "primary-fixed-dim": "#ffb688",
+                    "on-secondary-fixed-variant": "#4e453b",
+                    "error": "#ba1a1a",
+                    "primary": "#974800",
+                    "primary-container": "#e8791e",
+                    "tertiary-fixed": "#cbe6ff",
+                    "surface-container-lowest": "#ffffff",
+                    "surface": "#fff8f5",
+                    "on-secondary": "#ffffff",
+                    "inverse-on-surface": "#ffede4",
+                    "on-primary-fixed-variant": "#733600",
+                    "on-secondary-container": "#6b6156",
+                    "secondary": "#665d52",
+                    "surface-tint": "#974800",
+                    "on-background": "#241913",
+                    "surface-dim": "#ead6cc",
+                    "surface-container": "#ffeadf",
+                    "tertiary-fixed-dim": "#8fcdff",
+                    "background": "#fff8f5",
+                    "outline-variant": "#ddc1b1",
+                    "secondary-container": "#ebddd0",
+                    "surface-bright": "#fff8f5",
+                    "inverse-primary": "#ffb688",
+                    "primary-fixed": "#ffdbc7",
+                    "secondary-fixed-dim": "#d1c4b7",
+                    "on-surface-variant": "#564337",
+                    "surface-container-low": "#fff1ea",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-container": "#00334e",
+                    "surface-container-high": "#f9e4d9",
+                    "outline": "#8a7265",
+                    "on-surface": "#241913",
+                    "on-error": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-padding": "20px",
+                    "md": "16px",
+                    "stack-gap": "12px",
+                    "xl": "32px",
+                    "sm": "12px",
+                    "xs": "8px",
+                    "lg": "24px",
+                    "base": "4px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Be Vietnam Pro"],
+                    "body-md": ["Be Vietnam Pro"],
+                    "headline-md": ["Be Vietnam Pro"],
+                    "body-lg": ["Be Vietnam Pro"],
+                    "label-bold": ["Be Vietnam Pro"],
+                    "label-md": ["Be Vietnam Pro"],
+                    "headline-lg-mobile": ["Be Vietnam Pro"]
+            },
+            "fontSize": {
+                    "headline-lg": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-bold": ["12px", {"lineHeight": "16px", "fontWeight": "700"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["26px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            background-color: #fff8f5;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .map-gradient-overlay {
+            background: linear-gradient(to bottom, rgba(255,248,245,0) 60%, rgba(255,248,245,1) 100%);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col text-on-surface">
+<!-- TopAppBar (Transactional - Back button logic) -->
+<header class="w-full top-0 sticky z-50 bg-surface flex items-center justify-between px-container-padding py-md">
+<div class="flex items-center gap-xs">
+<button aria-label="Retour" class="active:scale-95 transition-transform hover:opacity-80 flex items-center justify-center w-10 h-10 rounded-full">
+<span class="material-symbols-outlined text-primary">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md-mobile text-primary">Détails de la course</h1>
+</div>
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-on-surface-variant">more_vert</span>
+</div>
+</header>
+<main class="flex-grow pb-32">
+<!-- Map Section (Asymmetric / Immersive) -->
+<section class="relative h-[40vh] w-full overflow-hidden">
+<div class="absolute inset-0 bg-secondary-fixed" data-location="Abidjan, Côte d'Ivoire" style="">
+<!-- Map Placeholder -->
+<img class="w-full h-full object-cover grayscale-[20%] opacity-80" data-alt="A highly detailed professional satellite and map view of a modern urban African city like Abidjan, featuring orange and blue route lines connecting point A to point B. The map style is minimalist and clean, utilizing a soft light-mode color palette with high-contrast path indicators. Cinematic lighting highlights the transit flow across a vibrant metropolitan layout." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWNR5Mk74qJ2JGs_l0azRIqKY48rbO-pBJ0kJR9dYO-vCSjJznjENzeqyBVZTV-Pa1fHBKCPbslmGF85VkakCy8zvi68gk6xE3dN71JgeuS6V87mNUWlEJj__lSjd5IeeUP5-937UEJGL1WxRI3WAoX8NhlPiW95UB7A5EhgRD8KRl0_WKuIQ9_gXVLQSoePkLiDHmfC2K7GHkvM-QNdVhmbSeGXM2OmtIzbzsWpvW-NzT0HmpSu0Y"/>
+<div class="absolute inset-0 map-gradient-overlay"></div>
+</div>
+<!-- Route Floating Info -->
+<div class="absolute top-md left-container-padding right-container-padding flex flex-col gap-xs">
+<div class="bg-surface/90 backdrop-blur-md p-md rounded-xl shadow-lg border border-outline-variant/30 flex flex-col gap-sm">
+<div class="flex items-start gap-md">
+<div class="flex flex-col items-center pt-1">
+<span class="material-symbols-outlined text-primary text-[18px]" style="font-variation-settings: 'FILL' 1;">radio_button_checked</span>
+<div class="w-[2px] h-8 bg-outline-variant my-1"></div>
+<span class="material-symbols-outlined text-tertiary text-[18px]" style="font-variation-settings: 'FILL' 1;">location_on</span>
+</div>
+<div class="flex flex-col gap-lg w-full">
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Départ</p>
+<p class="font-headline-md text-headline-md-mobile truncate">Plateau, Avenue Marchand</p>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Arrivée</p>
+<p class="font-headline-md text-headline-md-mobile truncate">Cocody, Riviera 3</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Package & Price Content -->
+<section class="px-container-padding -mt-8 relative z-10">
+<!-- Price Card (Large/Bento style) -->
+<div class="bg-primary-container text-on-primary-container p-lg rounded-xl shadow-xl flex items-center justify-between mb-lg transform hover:scale-[1.02] transition-transform duration-300">
+<div>
+<p class="font-label-md text-label-md opacity-90 uppercase font-bold tracking-widest">Prix proposé</p>
+<h2 class="font-headline-lg text-headline-lg-mobile mt-xs">5 500 FCFA</h2>
+</div>
+<div class="bg-white/20 p-md rounded-full">
+<span class="material-symbols-outlined text-[40px]" style="font-variation-settings: 'FILL' 1;">payments</span>
+</div>
+</div>
+<!-- Bento Grid: Package Details -->
+<div class="grid grid-cols-2 gap-stack-gap">
+<!-- Size -->
+<div class="bg-secondary-container p-md rounded-xl flex flex-col gap-xs">
+<span class="material-symbols-outlined text-on-secondary-container" style="font-variation-settings: 'FILL' 1;">straighten</span>
+<p class="font-label-md text-label-md text-on-secondary-container/70">Dimensions</p>
+<p class="font-headline-md text-headline-md-mobile">Taille M <span class="text-sm font-normal">(40x30cm)</span></p>
+</div>
+<!-- Weight -->
+<div class="bg-secondary-container p-md rounded-xl flex flex-col gap-xs">
+<span class="material-symbols-outlined text-on-secondary-container" style="font-variation-settings: 'FILL' 1;">weight</span>
+<p class="font-label-md text-label-md text-on-secondary-container/70">Poids</p>
+<p class="font-headline-md text-headline-md-mobile">Environ 3 kg</p>
+</div>
+<!-- Description Full Width -->
+<div class="col-span-2 bg-surface-container p-md rounded-xl flex flex-col gap-sm">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">inventory_2</span>
+<p class="font-label-bold text-label-bold text-primary uppercase">Description du colis</p>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+                        Colis contenant des pièces de rechange automobile fragiles. Bien emballé dans un carton rigide. Nécessite une manipulation délicate et un transport à l'abri de l'humidité.
+                    </p>
+</div>
+<!-- Urgency Tag -->
+<div class="col-span-2 bg-error-container/30 border border-error/20 p-md rounded-xl flex items-center justify-between">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-error" style="font-variation-settings: 'FILL' 1;">bolt</span>
+<p class="font-label-bold text-label-bold text-error">LIVRAISON URGENTE</p>
+</div>
+<p class="font-label-md text-label-md text-error">Avant 14:00</p>
+</div>
+</div>
+<!-- Additional Context -->
+<div class="mt-lg mb-4">
+<div class="flex items-center justify-between mb-sm">
+<h3 class="font-headline-md text-headline-md-mobile">Expéditeur</h3>
+<div class="flex items-center gap-xs text-primary">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-bold text-label-bold">4.8</span>
+</div>
+</div>
+<div class="flex items-center gap-md bg-white p-sm rounded-xl border border-outline-variant/20 shadow-sm">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-dim">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a friendly business professional in Abidjan, Côte d'Ivoire. The person has a warm and trustworthy expression, set against a clean, modern corporate background with soft, natural lighting. The overall style is professional, high-end, and perfectly integrated with a modern logistics app interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9hfZJZA5gF1oOY3zuJXwdJVcgWNiuRi2L6EYW5jq0OrgKHD-ODYGgCn_D9cxnVlWm3fgfOoBZoAHBkYv1rUJI7QdIzzXSz9mENdbTM5cXfjBgcD5wHGpOhteAwukqxws7eTIOTBjM8UtI8PMzMeMJhmvdN633SBtflHO5nNmrODnheQMTO8ytNFJkKS1UGVpp6pJPaJVHPmYzgSE0EddkRseO7vQATng0cwdk3QDAz_2BKty9snf-"/>
+</div>
+<div class="flex-grow">
+<p class="font-body-lg font-bold">Jean-Marc KOFFI</p>
+<p class="font-label-md text-on-surface-variant">Membre depuis 2 ans</p>
+</div>
+<button class="bg-secondary-container p-sm rounded-full active:scale-90 transition-all">
+<span class="material-symbols-outlined text-on-secondary-container">chat_bubble</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Action Bar (Transactional - Suppress Nav Shell) -->
+<footer class="fixed bottom-0 w-full bg-surface/80 backdrop-blur-xl px-container-padding py-lg z-50 shadow-[0px_-8px_24px_rgba(0,0,0,0.05)] rounded-t-3xl">
+<div class="flex flex-col gap-md">
+<button class="w-full h-[56px] bg-primary-container text-white font-headline-md rounded-xl shadow-lg active:scale-[0.98] transition-all flex items-center justify-center gap-sm">
+<span>Accepter la course</span>
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+<p class="text-center font-label-md text-on-surface-variant px-lg">
+                En acceptant, vous vous engagez à respecter les délais de livraison.
+            </p>
+</div>
+</footer>
+<!-- Micro-interaction Script -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const acceptBtn = document.querySelector('button');
+            // Adding a small hover effect highlight
+            const cards = document.querySelectorAll('.rounded-xl');
+            cards.forEach(card => {
+                card.addEventListener('touchstart', () => {
+                    card.style.opacity = '0.9';
+                });
+                card.addEventListener('touchend', () => {
+                    card.style.opacity = '1';
+                });
+            });
+        });
+    </script>
+</body></html>

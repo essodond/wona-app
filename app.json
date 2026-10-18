@@ -1,0 +1,83 @@
+{
+  "expo": {
+    "name": "WONA",
+    "slug": "wona-app",
+    "version": "1.0.0",
+    "scheme": "wona",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "backgroundColor": "#FFFFFF",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "tg.wona.mobile",
+      "config": {
+        "usesNonExemptEncryption": false
+      }
+    },
+    "android": {
+      "package": "tg.wona.mobile",
+      "adaptiveIcon": {
+        "backgroundColor": "#FFFFFF",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false,
+      "permissions": [
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.ACCESS_FINE_LOCATION"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#FFFFFF",
+          "image": "./assets/splash-icon.png",
+          "imageWidth": 180
+        }
+      ],
+      "expo-font",
+      [
+        "expo-secure-store",
+        {
+          "configureAndroidBackup": true,
+          "faceIDPermission": "Autoriser Wona à accéder à vos identifiants sécurisés."
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "Wona utilise votre position pour proposer et exécuter les livraisons proches."
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Wona accède à vos photos pour les colis, profils et preuves de livraison.",
+          "cameraPermission": "Wona utilise l’appareil photo pour les colis, documents et preuves de livraison.",
+          "microphonePermission": false
+        }
+      ],
+      "expo-document-picker",
+      [
+        "expo-notifications",
+        {
+          "color": "#E8791E",
+          "defaultChannel": "wona"
+        }
+      ],
+      "expo-status-bar"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "1a1958a2-7383-4541-b91c-297cac2d8fe2"
+      }
+    },
+    "owner": "essodonda"
+  }
+}

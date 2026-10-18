@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>WONA - Inscription Livreur</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .upload-card:active {
+            transform: scale(0.98);
+        }
+        .progress-step-active {
+            box-shadow: 0 0 0 4px rgba(232, 121, 30, 0.2);
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed": "#eee0d3",
+                    "tertiary-container": "#00a0ea",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-highest": "#f3dfd4",
+                    "on-tertiary-fixed-variant": "#004b71",
+                    "on-primary-fixed": "#311300",
+                    "on-tertiary-fixed": "#001e30",
+                    "tertiary": "#006494",
+                    "on-secondary-fixed": "#211a12",
+                    "inverse-surface": "#3a2e27",
+                    "on-error-container": "#93000a",
+                    "surface-variant": "#f3dfd4",
+                    "error-container": "#ffdad6",
+                    "on-primary-container": "#4f2300",
+                    "primary-fixed-dim": "#ffb688",
+                    "on-secondary-fixed-variant": "#4e453b",
+                    "error": "#ba1a1a",
+                    "primary": "#974800",
+                    "primary-container": "#e8791e",
+                    "tertiary-fixed": "#cbe6ff",
+                    "surface-container-lowest": "#ffffff",
+                    "surface": "#fff8f5",
+                    "on-secondary": "#ffffff",
+                    "inverse-on-surface": "#ffede4",
+                    "on-primary-fixed-variant": "#733600",
+                    "on-secondary-container": "#6b6156",
+                    "secondary": "#665d52",
+                    "surface-tint": "#974800",
+                    "on-background": "#241913",
+                    "surface-dim": "#ead6cc",
+                    "surface-container": "#ffeadf",
+                    "tertiary-fixed-dim": "#8fcdff",
+                    "background": "#fff8f5",
+                    "outline-variant": "#ddc1b1",
+                    "secondary-container": "#ebddd0",
+                    "surface-bright": "#fff8f5",
+                    "inverse-primary": "#ffb688",
+                    "primary-fixed": "#ffdbc7",
+                    "secondary-fixed-dim": "#d1c4b7",
+                    "on-surface-variant": "#564337",
+                    "surface-container-low": "#fff1ea",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-container": "#00334e",
+                    "surface-container-high": "#f9e4d9",
+                    "outline": "#8a7265",
+                    "on-surface": "#241913",
+                    "on-error": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-padding": "20px",
+                    "md": "16px",
+                    "stack-gap": "12px",
+                    "xl": "32px",
+                    "sm": "12px",
+                    "xs": "8px",
+                    "lg": "24px",
+                    "base": "4px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Be Vietnam Pro"],
+                    "body-md": ["Be Vietnam Pro"],
+                    "headline-md": ["Be Vietnam Pro"],
+                    "body-lg": ["Be Vietnam Pro"],
+                    "label-bold": ["Be Vietnam Pro"],
+                    "label-md": ["Be Vietnam Pro"],
+                    "headline-lg-mobile": ["Be Vietnam Pro"]
+            },
+            "fontSize": {
+                    "headline-lg": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-bold": ["12px", {"lineHeight": "16px", "fontWeight": "700"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["26px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen pb-24">
+<!-- Top Navigation Bar -->
+<header class="w-full top-0 sticky bg-surface dark:bg-on-background z-50 flex items-center justify-between px-container-padding py-md">
+<div class="flex items-center gap-4">
+<button class="hover:opacity-80 transition-opacity active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md-mobile text-primary dark:text-primary-fixed-dim">Documents</h1>
+</div>
+<div class="font-headline-md text-headline-md text-primary dark:text-primary-fixed-dim">WONA</div>
+</header>
+<main class="px-container-padding mt-lg">
+<!-- Stepper Indicator -->
+<div class="flex items-center justify-between mb-xl">
+<div class="flex flex-col items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-label-bold text-label-bold">
+<span class="material-symbols-outlined text-[18px]">check</span>
+</div>
+<span class="text-label-md font-label-md text-on-surface-variant">Profil</span>
+</div>
+<div class="flex-1 h-[2px] bg-primary-container mx-2 mb-6"></div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-label-bold text-label-bold progress-step-active">
+                    2
+                </div>
+<span class="text-label-md font-label-bold text-primary">Documents</span>
+</div>
+<div class="flex-1 h-[2px] bg-surface-container-highest mx-2 mb-6"></div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-label-bold text-label-bold">
+                    3
+                </div>
+<span class="text-label-md font-label-md text-on-surface-variant">Véhicule</span>
+</div>
+</div>
+<div class="mb-lg">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-xs">Vérification d'identité</h2>
+<p class="text-body-md text-on-surface-variant">Veuillez télécharger des photos claires de vos documents originaux pour valider votre compte.</p>
+</div>
+<!-- Document Upload Section -->
+<div class="flex flex-col gap-stack-gap">
+<!-- Upload Item 1: ID Card -->
+<div class="bg-surface-container p-md rounded-xl border border-outline-variant/30 transition-all">
+<div class="flex justify-between items-start mb-md">
+<div>
+<h3 class="font-label-bold text-on-surface text-lg">Pièce d'identité</h3>
+<p class="text-label-md text-on-surface-variant">CNI ou Passeport en cours de validité</p>
+</div>
+<span class="material-symbols-outlined text-primary">credit_card</span>
+</div>
+<div class="flex gap-md items-center overflow-x-auto pb-2">
+<label class="shrink-0 w-24 h-24 border-2 border-dashed border-outline-variant rounded-xl flex flex-col items-center justify-center bg-surface-container-low hover:bg-surface-container-high transition-colors cursor-pointer upload-card">
+<input accept="image/*" class="hidden" type="file"/>
+<span class="material-symbols-outlined text-primary mb-1">add_a_photo</span>
+<span class="text-[10px] font-label-bold text-primary">AJOUTER</span>
+</label>
+<!-- Preview 1 -->
+<div class="relative shrink-0 w-24 h-24 rounded-xl overflow-hidden shadow-sm group">
+<div class="w-full h-full bg-cover bg-center" data-alt="A high-quality close-up photograph of a professional identification card lying on a clean white surface. The lighting is bright and even, characteristic of a professional studio setup for corporate documentation. The color palette is clean, dominated by neutral tones with small accents of corporate orange that align with the brand's vibrant identity. The mood is secure and official." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB2Ugzpbm7nlro8VjQaKnqN7mR1Y6Nsu6EDNOgwZHyq2aWAX3lqRDMWoJf3SaOWgAfO7Z1N08E8ItbgCyU5oITZZ7XCUxTAWcmTkD41XhXLB3T9bnAeSaVm6alem_sWqcpUybZn-f9ZckoyAWZisgR-ftHiGtK7ZNb_ny9vkVDSapNM9DJmAi3L1EnwEdy133NMq4WcDOgfwa1GZ1j4dYepO6y3xBtrBoukri_LJImlb47U3Azn7V3N')"></div>
+<button class="absolute top-1 right-1 bg-error/90 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Upload Item 2: Driver's License -->
+<div class="bg-surface-container p-md rounded-xl border border-outline-variant/30 transition-all">
+<div class="flex justify-between items-start mb-md">
+<div>
+<h3 class="font-label-bold text-on-surface text-lg">Permis de conduire</h3>
+<p class="text-label-md text-on-surface-variant">Recto et Verso obligatoires</p>
+</div>
+<span class="material-symbols-outlined text-primary">license</span>
+</div>
+<div class="flex gap-md items-center overflow-x-auto pb-2">
+<label class="shrink-0 w-24 h-24 border-2 border-dashed border-outline-variant rounded-xl flex flex-col items-center justify-center bg-surface-container-low hover:bg-surface-container-high transition-colors cursor-pointer upload-card">
+<input accept="image/*" class="hidden" multiple="" type="file"/>
+<span class="material-symbols-outlined text-primary mb-1">file_upload</span>
+<span class="text-[10px] font-label-bold text-primary">UPLOAD</span>
+</label>
+<!-- Empty State / Placeholder for UX -->
+<div class="flex flex-col items-center justify-center w-24 h-24 border border-outline-variant/20 rounded-xl bg-surface-variant/30 opacity-60">
+<span class="material-symbols-outlined text-outline text-[20px]">image</span>
+<span class="text-[10px] text-outline mt-1 italic">Recto</span>
+</div>
+</div>
+</div>
+<!-- Upload Item 3: Grey Card -->
+<div class="bg-surface-container p-md rounded-xl border border-outline-variant/30 transition-all">
+<div class="flex justify-between items-start mb-md">
+<div>
+<h3 class="font-label-bold text-on-surface text-lg">Carte Grise</h3>
+<p class="text-label-md text-on-surface-variant">Document du véhicule de livraison</p>
+</div>
+<span class="material-symbols-outlined text-primary">directions_car</span>
+</div>
+<div class="flex gap-md items-center">
+<label class="w-full h-16 border-2 border-dashed border-outline-variant rounded-xl flex items-center justify-center gap-3 bg-surface-container-low hover:bg-surface-container-high transition-colors cursor-pointer upload-card">
+<input accept="image/*" class="hidden" type="file"/>
+<span class="material-symbols-outlined text-primary">cloud_upload</span>
+<span class="font-label-bold text-primary">Choisir un fichier</span>
+</label>
+</div>
+</div>
+</div>
+<!-- Professional Tip Card -->
+<div class="mt-lg p-md rounded-xl bg-tertiary-fixed text-on-tertiary-fixed flex gap-md items-center">
+<span class="material-symbols-outlined text-tertiary">info</span>
+<p class="text-body-md leading-tight">Assurez-vous que les 4 coins du document soient visibles et que le texte soit lisible.</p>
+</div>
+</main>
+<!-- Bottom Actions -->
+<div class="fixed bottom-0 left-0 w-full bg-surface px-container-padding py-md shadow-[0px_-4px_12px_rgba(0,0,0,0.05)] z-50 flex gap-md">
+<button class="flex-1 h-12 rounded-full border border-primary text-primary font-label-bold hover:bg-primary-fixed-dim/10 active:scale-95 transition-all">
+            Sauvegarder
+        </button>
+<button class="flex-[2] h-12 rounded-full bg-primary-container text-on-primary-container font-label-bold flex items-center justify-center gap-2 hover:opacity-90 shadow-lg active:scale-95 transition-all">
+            Suivant
+            <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+</div>
+<script>
+        // Simple Interaction logic for file upload previews
+        document.querySelectorAll('input[type="file"]').forEach(input => {
+            input.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    // Logic to show toast or update local state would go here
+                    console.log('Fichier sélectionné:', file.name);
+                }
+            });
+        });
+
+        // Toggle Dark Mode (Optional logic for future)
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark');
+        }
+    </script>
+</body></html>

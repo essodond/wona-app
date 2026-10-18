@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>WONA - Accueil Livreur</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Shared Tailwind Config -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed": "#eee0d3",
+                    "tertiary-container": "#00a0ea",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-highest": "#f3dfd4",
+                    "on-tertiary-fixed-variant": "#004b71",
+                    "on-primary-fixed": "#311300",
+                    "on-tertiary-fixed": "#001e30",
+                    "tertiary": "#006494",
+                    "on-secondary-fixed": "#211a12",
+                    "inverse-surface": "#3a2e27",
+                    "on-error-container": "#93000a",
+                    "surface-variant": "#f3dfd4",
+                    "error-container": "#ffdad6",
+                    "on-primary-container": "#4f2300",
+                    "primary-fixed-dim": "#ffb688",
+                    "on-secondary-fixed-variant": "#4e453b",
+                    "error": "#ba1a1a",
+                    "primary": "#974800",
+                    "primary-container": "#e8791e",
+                    "tertiary-fixed": "#cbe6ff",
+                    "surface-container-lowest": "#ffffff",
+                    "surface": "#fff8f5",
+                    "on-secondary": "#ffffff",
+                    "inverse-on-surface": "#ffede4",
+                    "on-primary-fixed-variant": "#733600",
+                    "on-secondary-container": "#6b6156",
+                    "secondary": "#665d52",
+                    "surface-tint": "#974800",
+                    "on-background": "#241913",
+                    "surface-dim": "#ead6cc",
+                    "surface-container": "#ffeadf",
+                    "tertiary-fixed-dim": "#8fcdff",
+                    "background": "#fff8f5",
+                    "outline-variant": "#ddc1b1",
+                    "secondary-container": "#ebddd0",
+                    "surface-bright": "#fff8f5",
+                    "inverse-primary": "#ffb688",
+                    "primary-fixed": "#ffdbc7",
+                    "secondary-fixed-dim": "#d1c4b7",
+                    "on-surface-variant": "#564337",
+                    "surface-container-low": "#fff1ea",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-container": "#00334e",
+                    "surface-container-high": "#f9e4d9",
+                    "outline": "#8a7265",
+                    "on-surface": "#241913",
+                    "on-error": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-padding": "20px",
+                    "md": "16px",
+                    "stack-gap": "12px",
+                    "xl": "32px",
+                    "sm": "12px",
+                    "xs": "8px",
+                    "lg": "24px",
+                    "base": "4px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Be Vietnam Pro"],
+                    "body-md": ["Be Vietnam Pro"],
+                    "headline-md": ["Be Vietnam Pro"],
+                    "body-lg": ["Be Vietnam Pro"],
+                    "label-bold": ["Be Vietnam Pro"],
+                    "label-md": ["Be Vietnam Pro"],
+                    "headline-lg-mobile": ["Be Vietnam Pro"]
+            },
+            "fontSize": {
+                    "headline-lg": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-bold": ["12px", {"lineHeight": "16px", "fontWeight": "700"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["26px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            background-color: #fff8f5;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bottom-sheet {
+            transition: transform 0.4s cubic-bezier(0.33, 1, 0.68, 1);
+            transform: translateY(calc(100% - 180px));
+        }
+        .bottom-sheet.expanded {
+            transform: translateY(0);
+        }
+        .drag-handle {
+            width: 40px;
+            height: 4px;
+            background-color: #ddc1b1;
+            border-radius: 2px;
+            margin: 12px auto;
+        }
+        .map-gradient {
+            background: linear-gradient(to bottom, rgba(255,248,245,0.9) 0%, rgba(255,248,245,0) 20%);
+        }
+        .toggle-knob {
+            transition: transform 0.2s ease-in-out;
+        }
+        input:checked + .toggle-bg .toggle-knob {
+            transform: translateX(24px);
+        }
+        input:checked + .toggle-bg {
+            background-color: #e8791e;
+        }
+    </style>
+</head>
+<body class="flex flex-col h-screen overflow-hidden">
+<!-- Top AppBar (JSON Component Implementation) -->
+<header class="w-full top-0 sticky bg-surface z-40 flex items-center justify-between px-container-padding py-md">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary" data-icon="menu">menu</span>
+<h1 class="font-headline-md text-headline-md-mobile text-primary">WONA</h1>
+</div>
+<!-- Toggle Status -->
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" id="statusToggle" type="checkbox" value=""/>
+<div class="toggle-bg w-14 h-8 bg-secondary-container rounded-full peer-focus:outline-none transition-colors duration-300 flex items-center px-1">
+<div class="toggle-knob w-6 h-6 bg-white rounded-full shadow-sm"></div>
+</div>
+<span class="ml-3 font-label-bold text-label-bold text-on-surface" id="statusLabel">Disponible</span>
+</label>
+</header>
+<!-- Main Content Canvas (Map Area) -->
+<main class="flex-grow relative overflow-hidden bg-surface-dim">
+<!-- Pseudo Map Background -->
+<div class="absolute inset-0 z-0" data-alt="A detailed digital map illustration of a bustling West African city center with vibrant orange route lines, GPS pins, and clean white architectural blocks. The lighting is bright and sunny, reflecting a high-energy urban logistics environment with a minimalist corporate modern aesthetic. The color palette is dominated by soft creams and primary orange accents." data-location="Abidjan, Ivory Coast" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDMvAel7nyMqJpKC6pTr0KcXqJ26YBqBVDsE0GLzC1mX-KWElyUi9J-W9hK7QhgfzFoFDRmaihYCrSqRA00Nv6yGUl_2v9Lk6B85Ee_aXVMFxUGTUkkbaoHrZrPRpRAO9zP12ORbyBUWOopGHMoKvZvLDHM5Ljw99XvDq4vFMfwjXzGCHW6OCsXUqxkoQtOtGRxpvw1n91SG4pU3sP9kArIljAG3Trb7OpcqfBGy829Xr6Y2Isxv3_M')">
+<div class="absolute inset-0 map-gradient"></div>
+</div>
+<!-- Floating UI Elements -->
+<div class="absolute top-4 left-container-padding z-10 flex flex-col gap-sm">
+<div class="bg-surface rounded-xl p-md shadow-lg border border-outline-variant/20 max-w-[200px]">
+<p class="font-label-md text-label-md text-secondary">Aujourd'hui</p>
+<h2 class="font-headline-md text-headline-md text-primary">12 450 CFA</h2>
+<div class="flex items-center gap-xs mt-1">
+<span class="material-symbols-outlined text-[14px] text-tertiary">check_circle</span>
+<p class="font-label-bold text-[10px] text-tertiary">8 courses</p>
+</div>
+</div>
+</div>
+<!-- Custom Delivery Pin (Center Map) -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
+<div class="relative flex items-center justify-center">
+<div class="absolute w-24 h-24 bg-primary-container/20 rounded-full animate-ping"></div>
+<div class="bg-primary-container p-3 rounded-full shadow-xl">
+<span class="material-symbols-outlined text-white" data-icon="moped" style="font-variation-settings: 'FILL' 1;">moped</span>
+</div>
+</div>
+</div>
+<!-- Bottom Sheet Slider -->
+<div class="bottom-sheet absolute inset-x-0 bottom-0 bg-surface rounded-t-[24px] shadow-[0px_-8px_24px_rgba(0,0,0,0.12)] z-30 pb-20" id="bottomSheet">
+<div class="drag-handle cursor-pointer" id="dragTrigger"></div>
+<div class="px-container-padding pb-md flex justify-between items-center">
+<h3 class="font-headline-md text-headline-md text-on-surface">Demandes à proximité</h3>
+<span class="bg-secondary-fixed text-on-secondary-fixed px-3 py-1 rounded-full font-label-bold text-[10px]">3 EN ATTENTE</span>
+</div>
+<!-- Request Cards List -->
+<div class="px-container-padding flex flex-col gap-stack-gap overflow-y-auto max-h-[60vh]">
+<!-- Request Card 1 -->
+<div class="bg-secondary-fixed/30 p-md rounded-xl border border-transparent hover:border-primary-container transition-all group">
+<div class="flex justify-between items-start mb-md">
+<div class="flex gap-md items-center">
+<div class="bg-primary-container/10 p-2 rounded-lg">
+<span class="material-symbols-outlined text-primary-container" data-icon="package_2" style="font-variation-settings: 'FILL' 1;">package_2</span>
+</div>
+<div>
+<h4 class="font-headline-md text-[16px] text-on-surface">Livraison Express</h4>
+<p class="font-body-md text-label-md text-on-surface-variant">Colis (2.5kg) • Cocody</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-headline-md text-primary">2 500 CFA</p>
+<p class="font-label-bold text-secondary text-[10px]">Paiement Cash</p>
+</div>
+</div>
+<div class="flex items-center gap-md py-xs border-t border-outline-variant/30">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px] text-primary" data-icon="near_me">near_me</span>
+<p class="font-label-md text-on-surface">1.2 km</p>
+</div>
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px] text-primary" data-icon="schedule">schedule</span>
+<p class="font-label-md text-on-surface">15 min</p>
+</div>
+</div>
+<button class="w-full mt-md bg-primary-container text-white py-3 rounded-xl font-label-bold active:scale-95 transition-transform">
+                        ACCEPTER LA DEMANDE
+                    </button>
+</div>
+<!-- Request Card 2 -->
+<div class="bg-secondary-fixed/30 p-md rounded-xl border border-transparent">
+<div class="flex justify-between items-start mb-md">
+<div class="flex gap-md items-center">
+<div class="bg-primary-container/10 p-2 rounded-lg">
+<span class="material-symbols-outlined text-primary-container" data-icon="restaurant">restaurant</span>
+</div>
+<div>
+<h4 class="font-headline-md text-[16px] text-on-surface">Menu Burger King</h4>
+<p class="font-body-md text-label-md text-on-surface-variant">Repas • Plateau</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-headline-md text-primary">1 800 CFA</p>
+<p class="font-label-bold text-secondary text-[10px]">WONA Pay</p>
+</div>
+</div>
+<div class="flex items-center gap-md py-xs border-t border-outline-variant/30">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px] text-primary" data-icon="near_me">near_me</span>
+<p class="font-label-md text-on-surface">3.5 km</p>
+</div>
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px] text-primary" data-icon="schedule">schedule</span>
+<p class="font-label-md text-on-surface">22 min</p>
+</div>
+</div>
+</div>
+<!-- Request Card 3 -->
+<div class="bg-secondary-fixed/30 p-md rounded-xl border border-transparent mb-8">
+<div class="flex justify-between items-start mb-md">
+<div class="flex gap-md items-center">
+<div class="bg-primary-container/10 p-2 rounded-lg">
+<span class="material-symbols-outlined text-primary-container" data-icon="shopping_bag">shopping_bag</span>
+</div>
+<div>
+<h4 class="font-headline-md text-[16px] text-on-surface">Courses Epicerie</h4>
+<p class="font-body-md text-label-md text-on-surface-variant">Articles variés • Riviera 2</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-headline-md text-primary">3 200 CFA</p>
+<p class="font-label-bold text-secondary text-[10px]">Paiement Cash</p>
+</div>
+</div>
+<div class="flex items-center gap-md py-xs border-t border-outline-variant/30">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px] text-primary" data-icon="near_me">near_me</span>
+<p class="font-label-md text-on-surface">0.8 km</p>
+</div>
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px] text-primary" data-icon="schedule">schedule</span>
+<p class="font-label-md text-on-surface">8 min</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (JSON Component Implementation) -->
+<nav class="fixed bottom-0 w-full rounded-t-xl z-50 bg-surface shadow-[0px_-4px_12px_rgba(0,0,0,0.05)] flex justify-around items-center h-16 w-full px-4">
+<!-- Accueil (Active) -->
+<button class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined text-[20px]" data-icon="home" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-md text-label-md">Accueil</span>
+</button>
+<!-- Revenus -->
+<button class="flex flex-col items-center justify-center text-secondary px-4 py-1 hover:bg-secondary-container rounded-full active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined text-[20px]" data-icon="payments">payments</span>
+<span class="font-label-md text-label-md">Revenus</span>
+</button>
+<!-- Profil -->
+<button class="flex flex-col items-center justify-center text-secondary px-4 py-1 hover:bg-secondary-container rounded-full active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined text-[20px]" data-icon="person">person</span>
+<span class="font-label-md text-label-md">Profil</span>
+</button>
+</nav>
+<script>
+        // Bottom Sheet Logic
+        const bottomSheet = document.getElementById('bottomSheet');
+        const dragTrigger = document.getElementById('dragTrigger');
+        let isExpanded = false;
+
+        dragTrigger.addEventListener('click', () => {
+            isExpanded = !isExpanded;
+            if (isExpanded) {
+                bottomSheet.classList.add('expanded');
+            } else {
+                bottomSheet.classList.remove('expanded');
+            }
+        });
+
+        // Toggle Status Logic
+        const statusToggle = document.getElementById('statusToggle');
+        const statusLabel = document.getElementById('statusLabel');
+
+        statusToggle.addEventListener('change', (e) => {
+            if (e.target.checked) {
+                statusLabel.textContent = 'Disponible';
+                statusLabel.className = 'ml-3 font-label-bold text-label-bold text-on-surface';
+                document.querySelector('.animate-ping')?.classList.remove('hidden');
+            } else {
+                statusLabel.textContent = 'Hors ligne';
+                statusLabel.className = 'ml-3 font-label-bold text-label-bold text-secondary';
+                document.querySelector('.animate-ping')?.classList.add('hidden');
+            }
+        });
+
+        // Touch Drag Simulation for Bottom Sheet
+        let startY = 0;
+        dragTrigger.addEventListener('touchstart', (e) => {
+            startY = e.touches[0].clientY;
+        });
+
+        dragTrigger.addEventListener('touchend', (e) => {
+            let endY = e.changedTouches[0].clientY;
+            if (startY > endY + 50) {
+                bottomSheet.classList.add('expanded');
+                isExpanded = true;
+            } else if (startY < endY - 50) {
+                bottomSheet.classList.remove('expanded');
+                isExpanded = false;
+            }
+        });
+    </script>
+</body></html>

@@ -1,0 +1,695 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Wona — Motion design</title>
+    <style>
+      @font-face {
+        font-family: "Be Vietnam Pro";
+        src: url("/node_modules/@expo-google-fonts/be-vietnam-pro/500Medium/BeVietnamPro_500Medium.ttf") format("truetype");
+        font-weight: 500;
+      }
+
+      @font-face {
+        font-family: "Be Vietnam Pro";
+        src: url("/node_modules/@expo-google-fonts/be-vietnam-pro/700Bold/BeVietnamPro_700Bold.ttf") format("truetype");
+        font-weight: 700;
+      }
+
+      @font-face {
+        font-family: "Be Vietnam Pro";
+        src: url("/node_modules/@expo-google-fonts/be-vietnam-pro/900Black/BeVietnamPro_900Black.ttf") format("truetype");
+        font-weight: 900;
+      }
+
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+        background: #111015;
+      }
+
+      body {
+        display: grid;
+        place-items: center;
+      }
+
+      canvas {
+        display: block;
+        width: min(100vw, 56.25vh);
+        height: min(177.777vw, 100vh);
+        background: #fff4ea;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="film" width="1080" height="1920" aria-label="Vidéo motion design Wona"></canvas>
+    <script>
+      const W = 1080;
+      const H = 1920;
+      const FPS = 30;
+      const DURATION = 15;
+      const ORANGE = "#f56600";
+      const ORANGE_DEEP = "#b83700";
+      const CREAM = "#fff4ea";
+      const INK = "#111015";
+      const WHITE = "#ffffff";
+      const MUTED = "#6f6159";
+      const FONT = '"Be Vietnam Pro", Arial, sans-serif';
+      const canvas = document.getElementById("film");
+      const ctx = canvas.getContext("2d", { alpha: false });
+
+      const imageSources = {
+        welcome: "/assets/onboarding/welcome-wona.jpg",
+        publish: "/assets/onboarding/publish-parcel.jpg",
+        tracking: "/assets/onboarding/live-tracking.jpg",
+        delivery: "/assets/onboarding/cash-on-delivery.jpg",
+      };
+      const images = {};
+
+      const clamp = (value, min = 0, max = 1) => Math.max(min, Math.min(max, value));
+      const mix = (from, to, amount) => from + (to - from) * amount;
+      const smooth = (value) => {
+        const x = clamp(value);
+        return x * x * (3 - 2 * x);
+      };
+      const easeOut = (value) => 1 - Math.pow(1 - clamp(value), 4);
+      const easeBack = (value) => {
+        const x = clamp(value) - 1;
+        return 1 + 2.70158 * x * x * x + 1.70158 * x * x;
+      };
+      const phase = (time, start, end) => clamp((time - start) / (end - start));
+      const sceneAlpha = (time, start, end, fade = 0.4) =>
+        smooth(phase(time, start, start + fade)) * (1 - smooth(phase(time, end - fade, end)));
+
+      function roundedPath(x, y, width, height, radius) {
+        const r = Math.min(radius, width / 2, height / 2);
+        ctx.beginPath();
+        ctx.moveTo(x + r, y);
+        ctx.arcTo(x + width, y, x + width, y + height, r);
+        ctx.arcTo(x + width, y + height, x, y + height, r);
+        ctx.arcTo(x, y + height, x, y, r);
+        ctx.arcTo(x, y, x + width, y, r);
+        ctx.closePath();
+      }
+
+      function fillRoundRect(x, y, width, height, radius, fill, stroke, lineWidth = 2) {
+        roundedPath(x, y, width, height, radius);
+        if (fill) {
+          ctx.fillStyle = fill;
+          ctx.fill();
+        }
+        if (stroke) {
+          ctx.strokeStyle = stroke;
+          ctx.lineWidth = lineWidth;
+          ctx.stroke();
+        }
+      }
+
+      function coverImage(image, x, y, width, height, zoom = 1, panX = 0.5, panY = 0.5) {
+        const scale = Math.max(width / image.width, height / image.height) * zoom;
+        const sourceWidth = width / scale;
+        const sourceHeight = height / scale;
+        const sourceX = clamp(panX) * Math.max(0, image.width - sourceWidth);
+        const sourceY = clamp(panY) * Math.max(0, image.height - sourceHeight);
+        ctx.drawImage(image, sourceX, sourceY, sourceWidth, sourceHeight, x, y, width, height);
+      }
+
+      function clippedImage(image, x, y, width, height, radius, zoom, panX, panY) {
+        ctx.save();
+        roundedPath(x, y, width, height, radius);
+        ctx.clip();
+        coverImage(image, x, y, width, height, zoom, panX, panY);
+        ctx.restore();
+      }
+
+      function label(text, x, y, size, color, weight = 700, align = "left", letterSpacing = 0) {
+        ctx.save();
+        ctx.fillStyle = color;
+        ctx.font = `${weight} ${size}px ${FONT}`;
+        ctx.textAlign = align;
+        ctx.textBaseline = "alphabetic";
+        if (!letterSpacing) {
+          ctx.fillText(text, x, y);
+        } else {
+          const glyphs = [...text];
+          const widths = glyphs.map((glyph) => ctx.measureText(glyph).width);
+          const total = widths.reduce((sum, width) => sum + width, 0) + letterSpacing * (glyphs.length - 1);
+          let cursor = align === "center" ? x - total / 2 : align === "right" ? x - total : x;
+          ctx.textAlign = "left";
+          glyphs.forEach((glyph, index) => {
+            ctx.fillText(glyph, cursor, y);
+            cursor += widths[index] + letterSpacing;
+          });
+        }
+        ctx.restore();
+      }
+
+      function paragraph(lines, x, y, size, color, lineHeight, weight = 500, align = "left") {
+        lines.forEach((line, index) => label(line, x, y + index * lineHeight, size, color, weight, align));
+      }
+
+      function pill(text, x, y, width, fill, color, border = null, size = 28) {
+        fillRoundRect(x, y, width, 64, 32, fill, border, 2);
+        label(text, x + width / 2, y + 42, size, color, 700, "center", 1.1);
+      }
+
+      function drawPin(x, y, scale = 1, color = ORANGE) {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.scale(scale, scale);
+        ctx.fillStyle = color;
+        ctx.beginPath();
+        ctx.arc(0, -16, 28, Math.PI, 0);
+        ctx.bezierCurveTo(28, 14, 0, 48, 0, 48);
+        ctx.bezierCurveTo(0, 48, -28, 14, -28, -16);
+        ctx.closePath();
+        ctx.fill();
+        ctx.fillStyle = WHITE;
+        ctx.beginPath();
+        ctx.arc(0, -16, 9, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+
+      function drawCheck(x, y, radius, fill, stroke = WHITE) {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.fillStyle = fill;
+        ctx.beginPath();
+        ctx.arc(0, 0, radius, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = stroke;
+        ctx.lineCap = "round";
+        ctx.lineJoin = "round";
+        ctx.lineWidth = radius * 0.18;
+        ctx.beginPath();
+        ctx.moveTo(-radius * 0.42, 0);
+        ctx.lineTo(-radius * 0.08, radius * 0.32);
+        ctx.lineTo(radius * 0.48, -radius * 0.32);
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      function drawRoute(progress, color = WHITE, width = 9) {
+        const route = new Path2D();
+        route.moveTo(70, 1520);
+        route.bezierCurveTo(210, 1440, 265, 1640, 430, 1550);
+        route.bezierCurveTo(590, 1460, 650, 1650, 820, 1550);
+        route.bezierCurveTo(930, 1485, 960, 1455, 1030, 1420);
+        ctx.save();
+        ctx.lineWidth = width;
+        ctx.lineCap = "round";
+        ctx.strokeStyle = color;
+        ctx.setLineDash([1000 * clamp(progress), 1200]);
+        ctx.stroke(route);
+        ctx.restore();
+
+        if (progress > 0.04) {
+          const x = mix(70, 1030, easeOut(progress));
+          const y = 1520 - Math.sin(progress * Math.PI * 4) * 65 - progress * 95;
+          ctx.save();
+          ctx.shadowColor = color;
+          ctx.shadowBlur = 28;
+          ctx.fillStyle = color;
+          ctx.beginPath();
+          ctx.arc(x, y, 12, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
+        }
+      }
+
+      function texture(opacity = 0.08, light = true) {
+        ctx.save();
+        ctx.globalAlpha = opacity;
+        ctx.fillStyle = light ? WHITE : INK;
+        for (let row = 0; row < 22; row++) {
+          for (let col = 0; col < 12; col++) {
+            const jitter = ((row * 19 + col * 31) % 17) - 8;
+            ctx.beginPath();
+            ctx.arc(34 + col * 96 + jitter, 42 + row * 92, 2 + ((row + col) % 3), 0, Math.PI * 2);
+            ctx.fill();
+          }
+        }
+        ctx.restore();
+      }
+
+      function drawSceneOne(time) {
+        const alpha = sceneAlpha(time, 0, 3.0, 0.3);
+        if (alpha <= 0) return;
+        const enter = easeBack(phase(time, 0.05, 0.95));
+        const lineIn = easeOut(phase(time, 0.35, 2.45));
+        ctx.save();
+        ctx.globalAlpha = alpha;
+
+        const gradient = ctx.createLinearGradient(0, 0, W, H);
+        gradient.addColorStop(0, "#ff852b");
+        gradient.addColorStop(0.52, ORANGE);
+        gradient.addColorStop(1, ORANGE_DEEP);
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, W, H);
+        texture(0.1, true);
+
+        ctx.save();
+        ctx.globalAlpha = 0.16;
+        ctx.strokeStyle = WHITE;
+        ctx.lineWidth = 3;
+        for (let radius = 160; radius < 720; radius += 160) {
+          ctx.beginPath();
+          ctx.arc(930, 260, radius, 0, Math.PI * 2);
+          ctx.stroke();
+        }
+        ctx.restore();
+
+        pill("LIVRAISON URBAINE  •  LOMÉ", 158, 210, 764, "rgba(255,255,255,.16)", WHITE, "rgba(255,255,255,.34)", 27);
+
+        ctx.save();
+        ctx.translate(W / 2, 760);
+        ctx.scale(0.78 + enter * 0.22, 0.78 + enter * 0.22);
+        ctx.globalAlpha *= clamp(enter * 1.5);
+        label("WONA", 0, 0, 204, WHITE, 900, "center", -5);
+        ctx.restore();
+
+        const textRise = mix(70, 0, easeOut(phase(time, 0.65, 1.4)));
+        ctx.globalAlpha = alpha * smooth(phase(time, 0.5, 1.15));
+        paragraph(["VOS COLIS.", "NOTRE MISSION."], W / 2, 960 + textRise, 79, WHITE, 92, 900, "center");
+        label("Simple. Rapide. Sécurisé.", W / 2, 1185 + textRise, 35, "rgba(255,255,255,.88)", 500, "center");
+
+        ctx.globalAlpha = alpha * 0.8;
+        drawRoute(lineIn, WHITE, 8);
+        if (lineIn > 0.8) {
+          drawPin(1000, 1385, easeBack(phase(time, 2.0, 2.45)) * 0.8, WHITE);
+        }
+        ctx.restore();
+      }
+
+      function drawSceneTwo(time) {
+        const alpha = sceneAlpha(time, 2.55, 6.0, 0.45);
+        if (alpha <= 0) return;
+        const enter = easeOut(phase(time, 2.65, 3.4));
+        const contentIn = easeOut(phase(time, 3.0, 3.8));
+        ctx.save();
+        ctx.globalAlpha = alpha;
+        ctx.fillStyle = CREAM;
+        ctx.fillRect(0, 0, W, H);
+        texture(0.045, false);
+
+        label("WONA", 64, 104, 48, ORANGE, 900, "left", -1);
+        pill("01", 870, 58, 140, ORANGE, WHITE, null, 29);
+
+        const cardY = mix(320, 170, enter);
+        ctx.save();
+        ctx.shadowColor = "rgba(40,20,6,.22)";
+        ctx.shadowBlur = 44;
+        ctx.shadowOffsetY = 24;
+        fillRoundRect(54, cardY, 972, 940, 52, WHITE);
+        ctx.restore();
+        clippedImage(images.publish, 54, cardY, 972, 940, 52, 1.02 + phase(time, 2.55, 6) * 0.08, 0.5, 0.54);
+
+        const shade = ctx.createLinearGradient(0, cardY + 470, 0, cardY + 940);
+        shade.addColorStop(0, "rgba(17,16,21,0)");
+        shade.addColorStop(1, "rgba(17,16,21,.72)");
+        ctx.fillStyle = shade;
+        roundedPath(54, cardY, 972, 940, 52);
+        ctx.fill();
+
+        ctx.globalAlpha = alpha * contentIn;
+        pill("POUR LES VENDEURS", 94, cardY + 730, 420, "rgba(255,255,255,.20)", WHITE, "rgba(255,255,255,.45)", 25);
+        label("PUBLIEZ.", 74, 1270, 118, INK, 900, "left", -3);
+        label("ON S'OCCUPE DU RESTE.", 74, 1360, 49, ORANGE, 900, "left", -1);
+        paragraph(["Décrivez votre colis, indiquez l'adresse", "et trouvez un livreur disponible."], 76, 1465, 33, MUTED, 52, 500, "left");
+
+        const buttonScale = 0.94 + 0.06 * easeBack(phase(time, 3.55, 4.25));
+        ctx.save();
+        ctx.translate(W / 2, 1703);
+        ctx.scale(buttonScale, buttonScale);
+        fillRoundRect(-466, -50, 932, 100, 50, ORANGE);
+        label("PUBLIER UN COLIS", 0, 15, 35, WHITE, 700, "center", 1.2);
+        ctx.restore();
+        ctx.restore();
+      }
+
+      function drawTrackingRoute(progress, x, y, width, height) {
+        const route = new Path2D();
+        route.moveTo(x + 60, y + height - 170);
+        route.bezierCurveTo(x + 140, y + height - 320, x + 250, y + height - 180, x + 360, y + height - 390);
+        route.bezierCurveTo(x + 470, y + height - 590, x + 620, y + height - 400, x + width - 90, y + 110);
+        ctx.save();
+        ctx.strokeStyle = WHITE;
+        ctx.lineWidth = 10;
+        ctx.lineCap = "round";
+        ctx.setLineDash([18, 18]);
+        ctx.lineDashOffset = -timeForDash * 35;
+        ctx.globalAlpha = 0.9;
+        ctx.stroke(route);
+        ctx.restore();
+        drawPin(x + 60, y + height - 190, 0.65, ORANGE);
+        if (progress > 0.6) drawPin(x + width - 90, y + 96, easeBack((progress - 0.6) / 0.4) * 0.72, WHITE);
+      }
+
+      let timeForDash = 0;
+      function drawSceneThree(time) {
+        const alpha = sceneAlpha(time, 5.55, 9.1, 0.45);
+        if (alpha <= 0) return;
+        timeForDash = time;
+        const enter = easeOut(phase(time, 5.7, 6.4));
+        const contentIn = easeOut(phase(time, 6.15, 6.95));
+        ctx.save();
+        ctx.globalAlpha = alpha;
+        ctx.fillStyle = INK;
+        ctx.fillRect(0, 0, W, H);
+        texture(0.055, true);
+        label("WONA", 64, 104, 48, ORANGE, 900, "left", -1);
+        pill("02", 870, 58, 140, "rgba(255,255,255,.10)", WHITE, "rgba(255,255,255,.20)", 29);
+
+        const imageX = mix(180, 52, enter);
+        clippedImage(images.tracking, imageX, 164, 976, 1000, 52, 1.03 + phase(time, 5.55, 9.1) * 0.06, 0.5, 0.5);
+        const overlay = ctx.createLinearGradient(0, 164, 0, 1164);
+        overlay.addColorStop(0, "rgba(17,16,21,.02)");
+        overlay.addColorStop(1, "rgba(17,16,21,.52)");
+        ctx.fillStyle = overlay;
+        roundedPath(imageX, 164, 976, 1000, 52);
+        ctx.fill();
+        drawTrackingRoute(phase(time, 5.8, 7.4), imageX, 164, 976, 1000);
+
+        ctx.globalAlpha = alpha * contentIn;
+        label("SUIVEZ.", 70, 1330, 118, WHITE, 900, "left", -3);
+        label("EN TEMPS RÉEL.", 70, 1425, 65, ORANGE, 900, "left", -2);
+        paragraph(["La position du livreur et chaque étape", "de la course, directement dans Wona."], 74, 1518, 31, "rgba(255,255,255,.72)", 50, 500, "left");
+
+        fillRoundRect(70, 1662, 940, 130, 34, "rgba(255,255,255,.09)", "rgba(255,255,255,.15)", 2);
+        ctx.fillStyle = "#3bd16f";
+        ctx.beginPath();
+        ctx.arc(126, 1727, 12, 0, Math.PI * 2);
+        ctx.fill();
+        label("LIVREUR EN ROUTE", 158, 1716, 28, WHITE, 700);
+        label("2,4 KM  •  12 MIN", 158, 1754, 25, "rgba(255,255,255,.60)", 500, "left", 0.6);
+        pill("SUIVRE", 782, 1694, 180, ORANGE, WHITE, null, 25);
+        ctx.restore();
+      }
+
+      function drawSceneFour(time) {
+        const alpha = sceneAlpha(time, 8.65, 12.1, 0.45);
+        if (alpha <= 0) return;
+        const enter = easeOut(phase(time, 8.8, 9.55));
+        const contentIn = easeOut(phase(time, 9.2, 10.0));
+        ctx.save();
+        ctx.globalAlpha = alpha;
+        const gradient = ctx.createLinearGradient(0, 0, 0, H);
+        gradient.addColorStop(0, "#ff7c1c");
+        gradient.addColorStop(1, ORANGE_DEEP);
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, W, H);
+        texture(0.09, true);
+        label("WONA", 64, 104, 48, WHITE, 900, "left", -1);
+        pill("03", 870, 58, 140, "rgba(255,255,255,.16)", WHITE, "rgba(255,255,255,.28)", 29);
+
+        const cardY = mix(300, 158, enter);
+        ctx.save();
+        ctx.shadowColor = "rgba(60,10,0,.30)";
+        ctx.shadowBlur = 48;
+        ctx.shadowOffsetY = 24;
+        fillRoundRect(54, cardY, 972, 960, 52, WHITE);
+        ctx.restore();
+        clippedImage(images.delivery, 54, cardY, 972, 960, 52, 1.02 + phase(time, 8.65, 12.1) * 0.08, 0.48, 0.5);
+
+        ctx.globalAlpha = alpha * contentIn;
+        drawCheck(895, cardY + 810, 68, ORANGE);
+        pill("PAIEMENT À LA LIVRAISON", 88, cardY + 785, 690, "rgba(17,16,21,.72)", WHITE, null, 25);
+
+        label("LIVREZ.", 70, 1305, 118, WHITE, 900, "left", -3);
+        label("EN TOUTE CONFIANCE.", 70, 1400, 54, WHITE, 900, "left", -1.5);
+        paragraph(["Livraison confirmée, paiement sécurisé", "et historique clair pour chaque course."], 74, 1496, 31, "rgba(255,255,255,.78)", 50, 500, "left");
+
+        const cards = [
+          ["RAPIDE", "Course locale"],
+          ["SIMPLE", "Tout-en-un"],
+          ["SÉCURISÉ", "Livreurs vérifiés"],
+        ];
+        cards.forEach(([title, subtitle], index) => {
+          const x = 58 + index * 340;
+          fillRoundRect(x, 1665, 310, 142, 34, "rgba(255,255,255,.14)", "rgba(255,255,255,.24)");
+          label(title, x + 24, 1718, 27, WHITE, 700);
+          label(subtitle, x + 24, 1762, 21, "rgba(255,255,255,.66)", 500);
+        });
+        ctx.restore();
+      }
+
+      function drawSceneFive(time) {
+        const alpha = sceneAlpha(time, 11.65, 15.2, 0.42);
+        if (alpha <= 0) return;
+        const logoIn = easeBack(phase(time, 11.85, 12.7));
+        const copyIn = easeOut(phase(time, 12.15, 13.0));
+        ctx.save();
+        ctx.globalAlpha = alpha;
+        const gradient = ctx.createRadialGradient(W * 0.5, H * 0.42, 80, W * 0.5, H * 0.45, 1120);
+        gradient.addColorStop(0, WHITE);
+        gradient.addColorStop(1, CREAM);
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, W, H);
+        texture(0.04, false);
+
+        ctx.save();
+        ctx.globalAlpha = 0.09;
+        ctx.strokeStyle = ORANGE;
+        ctx.lineWidth = 4;
+        for (let radius = 120; radius < 650; radius += 130) {
+          ctx.beginPath();
+          ctx.arc(90, 220, radius, 0, Math.PI * 2);
+          ctx.stroke();
+        }
+        ctx.restore();
+
+        ctx.save();
+        ctx.translate(W / 2, 630);
+        ctx.scale(0.72 + 0.28 * logoIn, 0.72 + 0.28 * logoIn);
+        ctx.globalAlpha *= clamp(logoIn * 1.5);
+        label("WONA", 0, 0, 205, ORANGE, 900, "center", -5);
+        ctx.restore();
+
+        ctx.globalAlpha = alpha * copyIn;
+        paragraph(["VOS COLIS.", "NOTRE MISSION."], W / 2, 840, 82, INK, 94, 900, "center");
+        label("Wona connecte vendeurs et livreurs à Lomé.", W / 2, 1075, 31, MUTED, 500, "center");
+
+        pill("PUBLIEZ", 85, 1192, 280, WHITE, ORANGE, "#f2c6a8", 27);
+        pill("SUIVEZ", 400, 1192, 280, WHITE, ORANGE, "#f2c6a8", 27);
+        pill("LIVREZ", 715, 1192, 280, WHITE, ORANGE, "#f2c6a8", 27);
+
+        const pulse = 1 + Math.sin((time - 12.7) * Math.PI * 2) * 0.012;
+        ctx.save();
+        ctx.translate(W / 2, 1434);
+        ctx.scale(pulse, pulse);
+        ctx.shadowColor = "rgba(245,102,0,.28)";
+        ctx.shadowBlur = 36;
+        fillRoundRect(-450, -58, 900, 116, 58, ORANGE);
+        label("WONA CONNECTE", 0, 18, 38, WHITE, 700, "center", 1.5);
+        ctx.restore();
+
+        ctx.globalAlpha = alpha * 0.16;
+        ctx.strokeStyle = ORANGE;
+        ctx.lineWidth = 6;
+        ctx.setLineDash([22, 20]);
+        ctx.beginPath();
+        ctx.moveTo(-30, 1720);
+        ctx.bezierCurveTo(260, 1540, 600, 1910, 1110, 1650);
+        ctx.stroke();
+        ctx.globalAlpha = alpha;
+        drawPin(942, 1655, 0.9, ORANGE);
+        label("LOMÉ, TOGO", W / 2, 1810, 25, MUTED, 700, "center", 4);
+        ctx.restore();
+      }
+
+      function drawTransition(time) {
+        const points = [2.55, 5.55, 8.65, 11.65];
+        points.forEach((point) => {
+          const local = phase(time, point - 0.18, point + 0.28);
+          if (local <= 0 || local >= 1) return;
+          const x = mix(-W * 1.3, W * 1.3, smooth(local));
+          ctx.save();
+          ctx.translate(x, H / 2);
+          ctx.rotate(-0.12);
+          ctx.fillStyle = point === 5.55 ? INK : point === 8.65 ? ORANGE : CREAM;
+          ctx.fillRect(-W * 0.75, -H, W * 0.7, H * 2);
+          ctx.restore();
+        });
+      }
+
+      function renderFrame(time) {
+        ctx.clearRect(0, 0, W, H);
+        ctx.fillStyle = CREAM;
+        ctx.fillRect(0, 0, W, H);
+        drawSceneOne(time);
+        drawSceneTwo(time);
+        drawSceneThree(time);
+        drawSceneFour(time);
+        drawSceneFive(time);
+        drawTransition(time);
+      }
+
+      async function loadAssets() {
+        await Promise.all(
+          Object.entries(imageSources).map(([key, source]) =>
+            new Promise((resolve, reject) => {
+              const image = new Image();
+              image.onload = () => {
+                images[key] = image;
+                resolve();
+              };
+              image.onerror = reject;
+              image.src = source;
+            }),
+          ),
+        );
+        await document.fonts.ready;
+        window.assetsReady = true;
+        renderFrame(0);
+      }
+
+      function createAudioTrack(duration) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContext) return null;
+        const audio = new AudioContext({ sampleRate: 48000 });
+        const destination = audio.createMediaStreamDestination();
+        const master = audio.createGain();
+        master.gain.value = 0.42;
+        master.connect(destination);
+        const start = audio.currentTime + 0.08;
+
+        const kick = (when) => {
+          const oscillator = audio.createOscillator();
+          const gain = audio.createGain();
+          oscillator.type = "sine";
+          oscillator.frequency.setValueAtTime(132, when);
+          oscillator.frequency.exponentialRampToValueAtTime(46, when + 0.18);
+          gain.gain.setValueAtTime(0.54, when);
+          gain.gain.exponentialRampToValueAtTime(0.001, when + 0.24);
+          oscillator.connect(gain).connect(master);
+          oscillator.start(when);
+          oscillator.stop(when + 0.26);
+        };
+
+        const hat = (when, level = 0.12) => {
+          const length = Math.floor(audio.sampleRate * 0.05);
+          const buffer = audio.createBuffer(1, length, audio.sampleRate);
+          const data = buffer.getChannelData(0);
+          for (let index = 0; index < length; index++) data[index] = Math.random() * 2 - 1;
+          const source = audio.createBufferSource();
+          const highpass = audio.createBiquadFilter();
+          const gain = audio.createGain();
+          source.buffer = buffer;
+          highpass.type = "highpass";
+          highpass.frequency.value = 6500;
+          gain.gain.setValueAtTime(level, when);
+          gain.gain.exponentialRampToValueAtTime(0.001, when + 0.05);
+          source.connect(highpass).connect(gain).connect(master);
+          source.start(when);
+        };
+
+        const pluck = (when, frequency, level = 0.075) => {
+          const oscillator = audio.createOscillator();
+          const gain = audio.createGain();
+          oscillator.type = "triangle";
+          oscillator.frequency.value = frequency;
+          gain.gain.setValueAtTime(0.001, when);
+          gain.gain.linearRampToValueAtTime(level, when + 0.012);
+          gain.gain.exponentialRampToValueAtTime(0.001, when + 0.26);
+          oscillator.connect(gain).connect(master);
+          oscillator.start(when);
+          oscillator.stop(when + 0.3);
+        };
+
+        const notes = [220, 277.18, 329.63, 440, 369.99, 329.63, 277.18, 329.63];
+        for (let step = 0; step < duration * 4; step++) {
+          const when = start + step * 0.25;
+          if (step % 2 === 0) kick(when);
+          else hat(when, step % 4 === 3 ? 0.16 : 0.10);
+          if (step % 2 === 1) pluck(when, notes[step % notes.length]);
+        }
+        [2.55, 5.55, 8.65, 11.65].forEach((transition) => {
+          pluck(start + transition, 440, 0.15);
+          pluck(start + transition + 0.07, 659.25, 0.12);
+        });
+        audio.resume();
+        return { audio, track: destination.stream.getAudioTracks()[0] };
+      }
+
+      function preferredMimeType() {
+        const candidates = [
+          "video/webm;codecs=vp9,opus",
+          "video/webm;codecs=vp8,opus",
+          "video/webm",
+          "video/mp4;codecs=avc1.42E01E,mp4a.40.2",
+          "video/mp4",
+        ];
+        return candidates.find((type) => MediaRecorder.isTypeSupported(type)) || "";
+      }
+
+      window.seekFrame = (time) => renderFrame(clamp(time, 0, DURATION));
+      window.startRender = async () => {
+        if (!window.assetsReady) throw new Error("Les assets ne sont pas encore prêts.");
+        const videoStream = canvas.captureStream(FPS);
+        const audioBundle = createAudioTrack(DURATION + 0.25);
+        const tracks = [...videoStream.getVideoTracks()];
+        if (audioBundle?.track) tracks.push(audioBundle.track);
+        const stream = new MediaStream(tracks);
+        const mimeType = preferredMimeType();
+        const options = {
+          videoBitsPerSecond: 10_000_000,
+          audioBitsPerSecond: 160_000,
+          ...(mimeType ? { mimeType } : {}),
+        };
+        const recorder = new MediaRecorder(stream, options);
+        const chunks = [];
+        const stopped = new Promise((resolve, reject) => {
+          recorder.ondataavailable = (event) => {
+            if (event.data.size) chunks.push(event.data);
+          };
+          recorder.onerror = () => reject(recorder.error || new Error("Échec de l'encodage vidéo."));
+          recorder.onstop = resolve;
+        });
+
+        recorder.start(1000);
+        const startedAt = performance.now();
+        await new Promise((resolve) => {
+          const step = (now) => {
+            const elapsed = (now - startedAt) / 1000;
+            renderFrame(Math.min(elapsed, DURATION));
+            if (elapsed >= DURATION) {
+              renderFrame(DURATION);
+              setTimeout(resolve, 120);
+            } else {
+              requestAnimationFrame(step);
+            }
+          };
+          requestAnimationFrame(step);
+        });
+
+        recorder.stop();
+        await stopped;
+        stream.getTracks().forEach((track) => track.stop());
+        if (audioBundle?.audio) await audioBundle.audio.close();
+
+        const recordedType = recorder.mimeType || mimeType || "video/webm";
+        const extension = recordedType.includes("mp4") ? "mp4" : "webm";
+        const blob = new Blob(chunks, { type: recordedType });
+        const url = URL.createObjectURL(blob);
+        const anchor = document.createElement("a");
+        anchor.href = url;
+        anchor.download = `wona-motion-design.${extension}`;
+        document.body.appendChild(anchor);
+        anchor.click();
+        anchor.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 3000);
+        return { mimeType: recordedType, extension, bytes: blob.size, duration: DURATION, fps: FPS };
+      };
+
+      loadAssets().catch((error) => {
+        window.assetError = String(error?.stack || error);
+        console.error(error);
+      });
+    </script>
+  </body>
+</html>

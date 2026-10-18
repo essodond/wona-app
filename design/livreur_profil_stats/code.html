@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed": "#eee0d3",
+                    "tertiary-container": "#00a0ea",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-highest": "#f3dfd4",
+                    "on-tertiary-fixed-variant": "#004b71",
+                    "on-primary-fixed": "#311300",
+                    "on-tertiary-fixed": "#001e30",
+                    "tertiary": "#006494",
+                    "on-secondary-fixed": "#211a12",
+                    "inverse-surface": "#3a2e27",
+                    "on-error-container": "#93000a",
+                    "surface-variant": "#f3dfd4",
+                    "error-container": "#ffdad6",
+                    "on-primary-container": "#4f2300",
+                    "primary-fixed-dim": "#ffb688",
+                    "on-secondary-fixed-variant": "#4e453b",
+                    "error": "#ba1a1a",
+                    "primary": "#974800",
+                    "primary-container": "#e8791e",
+                    "tertiary-fixed": "#cbe6ff",
+                    "surface-container-lowest": "#ffffff",
+                    "surface": "#fff8f5",
+                    "on-secondary": "#ffffff",
+                    "inverse-on-surface": "#ffede4",
+                    "on-primary-fixed-variant": "#733600",
+                    "on-secondary-container": "#6b6156",
+                    "secondary": "#665d52",
+                    "surface-tint": "#974800",
+                    "on-background": "#241913",
+                    "surface-dim": "#ead6cc",
+                    "surface-container": "#ffeadf",
+                    "tertiary-fixed-dim": "#8fcdff",
+                    "background": "#fff8f5",
+                    "outline-variant": "#ddc1b1",
+                    "secondary-container": "#ebddd0",
+                    "surface-bright": "#fff8f5",
+                    "inverse-primary": "#ffb688",
+                    "primary-fixed": "#ffdbc7",
+                    "secondary-fixed-dim": "#d1c4b7",
+                    "on-surface-variant": "#564337",
+                    "surface-container-low": "#fff1ea",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-container": "#00334e",
+                    "surface-container-high": "#f9e4d9",
+                    "outline": "#8a7265",
+                    "on-surface": "#241913",
+                    "on-error": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-padding": "20px",
+                    "md": "16px",
+                    "stack-gap": "12px",
+                    "xl": "32px",
+                    "sm": "12px",
+                    "xs": "8px",
+                    "lg": "24px",
+                    "base": "4px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Be Vietnam Pro"],
+                    "body-md": ["Be Vietnam Pro"],
+                    "headline-md": ["Be Vietnam Pro"],
+                    "body-lg": ["Be Vietnam Pro"],
+                    "label-bold": ["Be Vietnam Pro"],
+                    "label-md": ["Be Vietnam Pro"],
+                    "headline-lg-mobile": ["Be Vietnam Pro"]
+            },
+            "fontSize": {
+                    "headline-lg": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-bold": ["12px", {"lineHeight": "16px", "fontWeight": "700"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["26px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Be Vietnam Pro', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .premium-shimmer {
+            background: linear-gradient(90deg, #E8791E 0%, #ffdbc7 50%, #E8791E 100%);
+            background-size: 200% auto;
+            animation: shimmer 3s linear infinite;
+        }
+        @keyframes shimmer {
+            to { background-position: 200% center; }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen pb-24">
+<!-- Top AppBar -->
+<header class="w-full top-0 sticky bg-surface z-40 flex items-center justify-between px-container-padding py-md">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary" data-icon="arrow_back">arrow_back</span>
+</div>
+<h1 class="font-headline-md text-headline-md-mobile text-primary">WONA</h1>
+<div class="w-8"></div> <!-- Spacer for balance -->
+</header>
+<main class="px-container-padding pt-md flex flex-col gap-lg">
+<!-- Profile Header Section -->
+<section class="flex flex-col items-center text-center gap-md">
+<div class="relative">
+<div class="w-24 h-24 rounded-full border-4 border-primary-container p-1 shadow-lg overflow-hidden">
+<img class="w-full h-full object-cover rounded-full" data-alt="A professional portrait of a West African delivery driver smiling warmly. He is wearing a clean, modern orange polo shirt against a bright, airy architectural background. The lighting is natural and vibrant, emphasizing a professional yet friendly corporate modern aesthetic with warm orange and soft white tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDp3H-zMU7Vgpl3q4xo87YU5B0B9yGmOBicQQL1WOay9XeyRcAreD6E1oOmvnS1sYUUxjXpgG_xX2NFyFgYNbxu3wXpwzg4WnO9bSZbl_0nxARJgCatP6tQgeDsv7VFwXRpBfMicQRAaLGPlB7bCNCE7_unbY9VDrkwjsa7oIHiypIzGYZwUNo6xjwk94Ngrz5An2W5IN-2qLlC2Wa-qz7QuvfnJ4hUyJvwy661s7UNu6xI8HBvzdpR"/>
+</div>
+<div class="absolute -bottom-1 -right-1 bg-primary text-white p-1 rounded-full border-2 border-white">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+</div>
+<div class="flex flex-col gap-xs">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile">Moussa Diop</h2>
+<div class="flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-primary-container" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-bold text-label-bold text-on-surface">4.8/5</span>
+<span class="text-on-surface-variant text-label-md">(Note moyenne)</span>
+</div>
+</div>
+<!-- Premium Badge -->
+<div class="premium-shimmer px-lg py-sm rounded-full flex items-center gap-xs shadow-md">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+<span class="text-white font-label-bold text-label-bold">Premium actif</span>
+</div>
+</section>
+<!-- Stats Bento-style Grid -->
+<section class="grid grid-cols-2 gap-md">
+<div class="bg-secondary-container p-md rounded-xl flex flex-col items-center justify-center gap-xs text-on-secondary-container">
+<span class="material-symbols-outlined text-primary" data-icon="local_shipping">local_shipping</span>
+<span class="font-headline-md text-headline-md">150</span>
+<span class="font-label-md text-label-md opacity-80 uppercase tracking-wider">Livraisons</span>
+</div>
+<div class="bg-primary-fixed p-md rounded-xl flex flex-col items-center justify-center gap-xs text-on-primary-fixed">
+<span class="material-symbols-outlined text-primary" data-icon="speed">speed</span>
+<span class="font-headline-md text-headline-md">4.8/5</span>
+<span class="font-label-md text-label-md opacity-80 uppercase tracking-wider">Score</span>
+</div>
+</section>
+<!-- Action Menu -->
+<section class="flex flex-col gap-stack-gap">
+<button class="w-full h-14 bg-surface-container hover:bg-surface-container-high transition-colors px-md rounded-xl flex items-center justify-between group active:scale-[0.98]">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</div>
+<span class="font-body-lg text-body-lg text-on-surface">Paramètres</span>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:translate-x-1 transition-transform" data-icon="chevron_right">chevron_right</span>
+</button>
+<button class="w-full h-14 bg-surface-container hover:bg-surface-container-high transition-colors px-md rounded-xl flex items-center justify-between group active:scale-[0.98]">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+</div>
+<span class="font-body-lg text-body-lg text-on-surface">Aide</span>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:translate-x-1 transition-transform" data-icon="chevron_right">chevron_right</span>
+</button>
+<button class="w-full h-14 bg-white border border-error/20 hover:bg-error-container/10 transition-colors px-md rounded-xl flex items-center justify-between group mt-xl active:scale-[0.98]">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 bg-error-container/20 rounded-lg flex items-center justify-center text-error">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+</div>
+<span class="font-body-lg text-body-lg text-error">Déconnexion</span>
+</div>
+</button>
+</section>
+</main>
+<!-- Bottom Navigation -->
+<nav class="fixed bottom-0 w-full rounded-t-xl z-50 bg-surface shadow-[0px_-4px_12px_rgba(0,0,0,0.05)] flex justify-around items-center h-16 px-4">
+<a class="flex flex-col items-center justify-center text-secondary px-4 py-1 hover:bg-secondary-container rounded-full active:scale-90 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-md text-label-md">Accueil</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary px-4 py-1 hover:bg-secondary-container rounded-full active:scale-90 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="local_shipping">local_shipping</span>
+<span class="font-label-md text-label-md">Livraison</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary px-4 py-1 hover:bg-secondary-container rounded-full active:scale-90 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span class="font-label-md text-label-md">Historique</span>
+</a>
+<!-- Mapping "Profil" as active (though not in JSON labels, the prompt implies a profile view within the ecosystem) -->
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 active:scale-90 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="person" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-md text-label-md">Profil</span>
+</a>
+</nav>
+<script>
+        // Micro-interaction: Active ripple effect on buttons
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const x = e.clientX - e.target.offsetLeft;
+                const y = e.clientY - e.target.offsetTop;
+                const ripple = document.createElement('span');
+                ripple.style.left = `${x}px`;
+                ripple.style.top = `${y}px`;
+                ripple.classList.add('absolute', 'w-2', 'h-2', 'bg-white/20', 'rounded-full', 'animate-ping');
+                this.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+    </script>
+</body></html>

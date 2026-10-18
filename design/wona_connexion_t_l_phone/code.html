@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>WONA - Connexion</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed": "#eee0d3",
+                    "tertiary-container": "#00a0ea",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-highest": "#f3dfd4",
+                    "on-tertiary-fixed-variant": "#004b71",
+                    "on-primary-fixed": "#311300",
+                    "on-tertiary-fixed": "#001e30",
+                    "tertiary": "#006494",
+                    "on-secondary-fixed": "#211a12",
+                    "inverse-surface": "#3a2e27",
+                    "on-error-container": "#93000a",
+                    "surface-variant": "#f3dfd4",
+                    "error-container": "#ffdad6",
+                    "on-primary-container": "#4f2300",
+                    "primary-fixed-dim": "#ffb688",
+                    "on-secondary-fixed-variant": "#4e453b",
+                    "error": "#ba1a1a",
+                    "primary": "#974800",
+                    "primary-container": "#e8791e",
+                    "tertiary-fixed": "#cbe6ff",
+                    "surface-container-lowest": "#ffffff",
+                    "surface": "#fff8f5",
+                    "on-secondary": "#ffffff",
+                    "inverse-on-surface": "#ffede4",
+                    "on-primary-fixed-variant": "#733600",
+                    "on-secondary-container": "#6b6156",
+                    "secondary": "#665d52",
+                    "surface-tint": "#974800",
+                    "on-background": "#241913",
+                    "surface-dim": "#ead6cc",
+                    "surface-container": "#ffeadf",
+                    "tertiary-fixed-dim": "#8fcdff",
+                    "background": "#fff8f5",
+                    "outline-variant": "#ddc1b1",
+                    "secondary-container": "#ebddd0",
+                    "surface-bright": "#fff8f5",
+                    "inverse-primary": "#ffb688",
+                    "primary-fixed": "#ffdbc7",
+                    "secondary-fixed-dim": "#d1c4b7",
+                    "on-surface-variant": "#564337",
+                    "surface-container-low": "#fff1ea",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-container": "#00334e",
+                    "surface-container-high": "#f9e4d9",
+                    "outline": "#8a7265",
+                    "on-surface": "#241913",
+                    "on-error": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-padding": "20px",
+                    "md": "16px",
+                    "stack-gap": "12px",
+                    "xl": "32px",
+                    "sm": "12px",
+                    "xs": "8px",
+                    "lg": "24px",
+                    "base": "4px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Be Vietnam Pro"],
+                    "body-md": ["Be Vietnam Pro"],
+                    "headline-md": ["Be Vietnam Pro"],
+                    "body-lg": ["Be Vietnam Pro"],
+                    "label-bold": ["Be Vietnam Pro"],
+                    "label-md": ["Be Vietnam Pro"],
+                    "headline-lg-mobile": ["Be Vietnam Pro"]
+            },
+            "fontSize": {
+                    "headline-lg": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-bold": ["12px", {"lineHeight": "16px", "fontWeight": "700"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["26px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            background-color: #fff8f5;
+        }
+        .phone-input-focus:focus-within {
+            border-color: #e8791e;
+            box-shadow: 0 0 0 1px #e8791e;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+<!-- Top Navigation (Shell suppressed for Transactional screen per guidelines) -->
+<header class="w-full top-0 sticky bg-surface flex items-center justify-between px-container-padding py-md">
+<div class="active:scale-95 transition-transform hover:opacity-80">
+<span class="material-symbols-outlined text-primary">arrow_back</span>
+</div>
+<div class="font-headline-md text-headline-md-mobile text-primary font-extrabold tracking-tight">WONA</div>
+<div class="w-6"></div> <!-- Spacer for centering -->
+</header>
+<main class="flex-grow flex flex-col items-center justify-center px-container-padding pb-xl">
+<!-- Hero Visual Section -->
+<div class="w-full max-w-md mb-xl text-center space-y-md">
+<div class="relative h-48 w-full rounded-xl overflow-hidden bg-surface-container mb-lg">
+<img class="w-full h-full object-cover opacity-90" data-alt="A cinematic, high-quality photograph of a modern urban street scene in West Africa, featuring soft, warm sunlight illuminating vibrant city textures. In the foreground, a sleek logistics delivery motorcycle is partially visible, emphasizing speed and efficiency. The color palette is dominated by professional whites and warm oranges, creating a clean, energetic, and trustworthy atmosphere that aligns with a premium logistics brand aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0iAksM_vE_5z2yJVb-uiFWUMAhLva7Qs-7Zgy9koag_F3t9XAXXkCCliBkwc3e8MFzxvsrZOV5TVEGZs7LeZQ25oy-wCdmI7qOwak9njkmsrqTgFdyBVmqglzzruXJLU-C7TBKfw8T8Qulsc0vUBhPUeHnnBuUP1UTf2y0o19H6EAXh5f_4qlO1tLw_JmHRrV3A7N2wNl11S_ZMjwxWujjljT3RiWWNHk3-IT0dTg33QSEaCM1brR"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container to-transparent"></div>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Bienvenue sur WONA</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-[280px] mx-auto">
+                Entrez votre numéro pour vous connecter ou créer un compte.
+            </p>
+</div>
+<!-- Phone Input Section -->
+<div class="w-full max-w-md space-y-lg">
+<!-- Label -->
+<div class="space-y-base">
+<label class="font-label-bold text-label-bold text-on-surface-variant ml-xs">Numéro de téléphone</label>
+<!-- Modern Input with Flag -->
+<div class="flex items-center bg-surface-container-lowest border border-outline/20 rounded-xl p-base phone-input-focus transition-all duration-200">
+<button class="flex items-center gap-xs px-md py-sm hover:bg-surface-container transition-colors rounded-lg group">
+<div class="w-6 h-4 bg-gray-200 rounded-sm overflow-hidden flex items-center justify-center">
+<span class="text-[10px] font-bold">🇨🇮</span> <!-- Representative flag for the region context -->
+</div>
+<span class="font-body-lg text-body-lg text-on-surface">+225</span>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:translate-y-0.5 transition-transform">expand_more</span>
+</button>
+<div class="w-[1px] h-8 bg-outline/10 mx-xs"></div>
+<input class="flex-grow bg-transparent border-none focus:ring-0 font-body-lg text-body-lg text-on-surface placeholder:text-outline-variant px-md" maxlength="10" placeholder="07 00 00 00 00" type="tel"/>
+</div>
+</div>
+<!-- Action Button -->
+<button class="w-full bg-primary-container text-on-primary h-[56px] rounded-xl font-headline-md text-headline-md shadow-lg shadow-primary-container/20 active:scale-[0.98] transition-all duration-200 hover:brightness-110 flex items-center justify-center gap-sm">
+                Recevoir le code
+                <span class="material-symbols-outlined">chevron_right</span>
+</button>
+<!-- Legal/Help -->
+<div class="text-center py-md">
+<p class="font-label-md text-label-md text-on-surface-variant">
+                    En continuant, vous acceptez nos 
+                    <a class="text-primary font-bold hover:underline" href="#">Conditions d'Utilisation</a>
+</p>
+</div>
+</div>
+</main>
+<!-- Async Interactions Script -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const input = document.querySelector('input[type="tel"]');
+            const button = document.querySelector('button.bg-primary-container');
+
+            // Simple formatting for the phone number
+            input.addEventListener('input', (e) => {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length > 10) value = value.slice(0, 10);
+                
+                // Add visual spacing
+                let formatted = "";
+                for (let i = 0; i < value.length; i++) {
+                    if (i > 0 && i % 2 === 0) formatted += " ";
+                    formatted += value[i];
+                }
+                e.target.value = formatted;
+                
+                // Active state for button
+                if (value.length === 10) {
+                    button.classList.remove('opacity-50');
+                } else {
+                    button.classList.add('opacity-50');
+                }
+            });
+
+            // Initial button state
+            button.classList.add('opacity-50');
+            
+            // Interaction feedback
+            button.addEventListener('click', () => {
+                if(input.value.replace(/\D/g, '').length === 10) {
+                    button.innerHTML = '<span class="material-symbols-outlined animate-spin">progress_activity</span>';
+                    setTimeout(() => {
+                        button.innerHTML = 'Recevoir le code <span class="material-symbols-outlined">chevron_right</span>';
+                    }, 2000);
+                }
+            });
+        });
+    </script>
+</body></html>

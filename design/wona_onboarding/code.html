@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>WONA Onboarding</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed": "#eee0d3",
+                    "tertiary-container": "#00a0ea",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-highest": "#f3dfd4",
+                    "on-tertiary-fixed-variant": "#004b71",
+                    "on-primary-fixed": "#311300",
+                    "on-tertiary-fixed": "#001e30",
+                    "tertiary": "#006494",
+                    "on-secondary-fixed": "#211a12",
+                    "inverse-surface": "#3a2e27",
+                    "on-error-container": "#93000a",
+                    "surface-variant": "#f3dfd4",
+                    "error-container": "#ffdad6",
+                    "on-primary-container": "#4f2300",
+                    "primary-fixed-dim": "#ffb688",
+                    "on-secondary-fixed-variant": "#4e453b",
+                    "error": "#ba1a1a",
+                    "primary": "#974800",
+                    "primary-container": "#e8791e",
+                    "tertiary-fixed": "#cbe6ff",
+                    "surface-container-lowest": "#ffffff",
+                    "surface": "#fff8f5",
+                    "on-secondary": "#ffffff",
+                    "inverse-on-surface": "#ffede4",
+                    "on-primary-fixed-variant": "#733600",
+                    "on-secondary-container": "#6b6156",
+                    "secondary": "#665d52",
+                    "surface-tint": "#974800",
+                    "on-background": "#241913",
+                    "surface-dim": "#ead6cc",
+                    "surface-container": "#ffeadf",
+                    "tertiary-fixed-dim": "#8fcdff",
+                    "background": "#fff8f5",
+                    "outline-variant": "#ddc1b1",
+                    "secondary-container": "#ebddd0",
+                    "surface-bright": "#fff8f5",
+                    "inverse-primary": "#ffb688",
+                    "primary-fixed": "#ffdbc7",
+                    "secondary-fixed-dim": "#d1c4b7",
+                    "on-surface-variant": "#564337",
+                    "surface-container-low": "#fff1ea",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-container": "#00334e",
+                    "surface-container-high": "#f9e4d9",
+                    "outline": "#8a7265",
+                    "on-surface": "#241913",
+                    "on-error": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-padding": "20px",
+                    "md": "16px",
+                    "stack-gap": "12px",
+                    "xl": "32px",
+                    "sm": "12px",
+                    "xs": "8px",
+                    "lg": "24px",
+                    "base": "4px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Be Vietnam Pro"],
+                    "body-md": ["Be Vietnam Pro"],
+                    "headline-md": ["Be Vietnam Pro"],
+                    "body-lg": ["Be Vietnam Pro"],
+                    "label-bold": ["Be Vietnam Pro"],
+                    "label-md": ["Be Vietnam Pro"],
+                    "headline-lg-mobile": ["Be Vietnam Pro"]
+            },
+            "fontSize": {
+                    "headline-lg": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-bold": ["12px", {"lineHeight": "16px", "fontWeight": "700"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["26px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Be Vietnam Pro', sans-serif; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .carousel-container { scroll-snap-type: x mandatory; }
+        .carousel-item { scroll-snap-align: start; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col overflow-hidden">
+<!-- Top App Bar (Suppressing Navigation Shell as per rules for Transactional/Onboarding) -->
+<header class="w-full top-0 sticky bg-surface flex items-center justify-between px-container-padding py-md z-50">
+<h1 class="font-headline-md text-headline-md text-primary">WONA</h1>
+<button class="text-secondary font-label-md hover:opacity-80 transition-opacity" onclick="skipOnboarding()">Passer</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex flex-col relative overflow-hidden">
+<!-- Animated Background Element (Atmospheric) -->
+<div class="absolute inset-0 z-0 opacity-20 pointer-events-none">
+
+</div>
+<!-- Carousel Container -->
+<div class="carousel-container no-scrollbar flex overflow-x-auto h-full w-full relative z-10" id="carousel">
+<!-- Step 1: Publication -->
+<section class="carousel-item flex-shrink-0 w-full h-full flex flex-col items-center justify-center px-container-padding">
+<div class="w-full max-w-sm flex flex-col items-center gap-xl">
+<div class="relative w-full aspect-square rounded-[32px] overflow-hidden bg-secondary-container flex items-center justify-center p-lg shadow-lg">
+<img class="w-full h-full object-contain" data-alt="A clean, modern 3D illustration of a vibrant orange delivery package being handed over by a friendly professional courier. The background is a soft beige architectural space with natural morning light. The style is high-end digital corporate, using a primary orange and soft cream palette to evoke trust and efficiency in a West African urban setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxNFViMiIf0Md3JGh4TYnovBb3X7hrE1b8mmBoBZ1uMHkLWoRHLQHgLdW9Gn7zsDA1-vliac0ryvIEBioE813B9P3bntU22yHF6ednaGVMAtwxuqw3MpdGw6lMZO9KeP57lelCepk50FCai031sdQ3TjD-LzpLnHqt1b5NEPyrvM_z7btG8tHnSSRs_SKhMeKMUqFaFjxMooz_g8RzsxwQXKMVErA8hlDSKqTTPr6CggKV9MbYbK-e"/>
+</div>
+<div class="text-center space-y-md">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Publiez un colis, un livreur vous répond</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Simple et rapide. Décrivez votre besoin et recevez des propositions instantanément.</p>
+</div>
+</div>
+</section>
+<!-- Step 2: Tracking -->
+<section class="carousel-item flex-shrink-0 w-full h-full flex flex-col items-center justify-center px-container-padding">
+<div class="w-full max-w-sm flex flex-col items-center gap-xl">
+<div class="relative w-full aspect-square rounded-[32px] overflow-hidden bg-secondary-container shadow-lg">
+<div class="absolute inset-0" data-alt="A stylized, minimalist map of a modern African city with a vibrant orange delivery route line. A small pulsing icon representing a delivery driver moves along the path. The map uses a sophisticated color scheme of soft creams and warm greys, with the orange route providing a energetic contrast. High-quality UI aesthetic with soft depth shadows." data-location="Dakar" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDQkjk2CRZh0-qOHcuL-e7KNKeBbpqv_66a71cnyRp5eOGfxpmADNj45xHn3mcQuKZyff1HSitEZ2CHL83BEQZozR1w_4j1F7ifCOY5wOrYgV3kKTVy-a65HsuwPpTJPPQRKNaNNbUxFQ2vqegvDjBcalfC9l6C8epEov42guqcTMg6sQUEWUobrFYFTqohLxv1UKFwQJNlOCeV0zzvmw4seataFPjkTjCL02v7n592-pqQy0rJv8Ow')"></div>
+<div class="absolute bottom-4 left-4 right-4 bg-surface/90 backdrop-blur-md p-md rounded-xl flex items-center gap-md border border-outline-variant/30">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined">local_shipping</span>
+</div>
+<div>
+<p class="font-label-bold text-label-bold">En route</p>
+<p class="font-body-md text-body-md opacity-70">Arrivée dans 12 min</p>
+</div>
+</div>
+</div>
+<div class="text-center space-y-md">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Suivez votre livraison en temps réel</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Gardez l'esprit tranquille. Visualisez chaque étape du trajet de votre colis sur la carte.</p>
+</div>
+</div>
+</section>
+<!-- Step 3: Payment -->
+<section class="carousel-item flex-shrink-0 w-full h-full flex flex-col items-center justify-center px-container-padding">
+<div class="w-full max-w-sm flex flex-col items-center gap-xl">
+<div class="relative w-full aspect-square rounded-[32px] overflow-hidden bg-secondary-container flex items-center justify-center p-lg shadow-lg">
+<div class="flex flex-col items-center gap-lg">
+<div class="w-32 h-32 rounded-full bg-primary-container/20 flex items-center justify-center text-primary-container animate-pulse">
+<span class="material-symbols-outlined !text-7xl">payments</span>
+</div>
+<img class="w-full h-40 object-cover rounded-2xl" data-alt="A sophisticated close-up of hands exchanging crisp currency notes in a clean, professional environment. The lighting is warm and reassuring, emphasizing the safety and reliability of the transaction. The color palette features rich browns, deep oranges, and soft whites, maintaining the premium corporate-friendly aesthetic of the logistics brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2Y30axDQLzfnVS0qV17szv8VmhhXNy38Y3oK8JuR0CzOaCMPAKAqqWiuy6ikNhedjOVkE8K15KZRX7y3v3ByuAML2yDzeFKbtQyE4Uw36BzxWK_fQeWlodqee3LUXYqRuVbU_3-3mKiMrsG3sDhwtEpDLMUG77T4_ByrTGt_rPck_81my7Rl_KhEF3fkrwvTw1cw2c9L96Hin20pHJu8wgSmlAb93GLh8-3bQJbv2PmOZppVylva7"/>
+</div>
+</div>
+<div class="text-center space-y-md">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Payez en espèces à la livraison</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Pas besoin de carte bancaire. Réglez votre course en toute sécurité une fois le colis reçu.</p>
+</div>
+</div>
+</section>
+</div>
+<!-- Progress Indicators -->
+<div class="flex justify-center gap-xs pb-xl">
+<div class="h-2 w-8 rounded-full bg-primary-container transition-all duration-300" id="dot-0"></div>
+<div class="h-2 w-2 rounded-full bg-outline-variant transition-all duration-300" id="dot-1"></div>
+<div class="h-2 w-2 rounded-full bg-outline-variant transition-all duration-300" id="dot-2"></div>
+</div>
+<!-- Footer Action -->
+<footer class="px-container-padding pb-xl pt-md z-20">
+<button class="w-full h-14 bg-primary-container text-on-primary font-headline-md rounded-xl shadow-lg active:scale-95 transition-all flex items-center justify-center gap-md" id="nextBtn" onclick="nextSlide()">
+<span id="btnText">Suivant</span>
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</footer>
+</main>
+<script>
+        const carousel = document.getElementById('carousel');
+        const nextBtn = document.getElementById('nextBtn');
+        const btnText = document.getElementById('btnText');
+        const dots = [
+            document.getElementById('dot-0'),
+            document.getElementById('dot-1'),
+            document.getElementById('dot-2')
+        ];
+        
+        let currentIdx = 0;
+
+        carousel.addEventListener('scroll', () => {
+            const width = carousel.offsetWidth;
+            const newIdx = Math.round(carousel.scrollLeft / width);
+            if (newIdx !== currentIdx) {
+                updateUI(newIdx);
+            }
+        });
+
+        function updateUI(idx) {
+            currentIdx = idx;
+            
+            // Update Dots
+            dots.forEach((dot, i) => {
+                if (i === idx) {
+                    dot.classList.replace('w-2', 'w-8');
+                    dot.classList.replace('bg-outline-variant', 'bg-primary-container');
+                } else {
+                    dot.classList.replace('w-8', 'w-2');
+                    dot.classList.replace('bg-primary-container', 'bg-outline-variant');
+                }
+            });
+
+            // Update Button Text
+            if (idx === 2) {
+                btnText.textContent = "Commencer";
+            } else {
+                btnText.textContent = "Suivant";
+            }
+        }
+
+        function nextSlide() {
+            if (currentIdx < 2) {
+                carousel.scrollTo({
+                    left: carousel.offsetWidth * (currentIdx + 1),
+                    behavior: 'smooth'
+                });
+            } else {
+                completeOnboarding();
+            }
+        }
+
+        function skipOnboarding() {
+            completeOnboarding();
+        }
+
+        function completeOnboarding() {
+            // Ripple transition before navigating
+            document.body.classList.add('pointer-events-none');
+            const ripple = document.createElement('div');
+            ripple.className = 'fixed inset-0 bg-primary z-[100] transform scale-0 rounded-full transition-transform duration-700 ease-in-out';
+            document.body.appendChild(ripple);
+            
+            setTimeout(() => {
+                ripple.classList.add('scale-[3]');
+            }, 10);
+
+            setTimeout(() => {
+                // In a real app, window.location.href = '/home'
+                alert('Onboarding terminé ! Bienvenue sur WONA.');
+            }, 750);
+        }
+    </script>
+</body></html>

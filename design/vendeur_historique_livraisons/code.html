@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>WONA - Historique Vendeur</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Shared Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed": "#eee0d3",
+                    "tertiary-container": "#00a0ea",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-highest": "#f3dfd4",
+                    "on-tertiary-fixed-variant": "#004b71",
+                    "on-primary-fixed": "#311300",
+                    "on-tertiary-fixed": "#001e30",
+                    "tertiary": "#006494",
+                    "on-secondary-fixed": "#211a12",
+                    "inverse-surface": "#3a2e27",
+                    "on-error-container": "#93000a",
+                    "surface-variant": "#f3dfd4",
+                    "error-container": "#ffdad6",
+                    "on-primary-container": "#4f2300",
+                    "primary-fixed-dim": "#ffb688",
+                    "on-secondary-fixed-variant": "#4e453b",
+                    "error": "#ba1a1a",
+                    "primary": "#974800",
+                    "primary-container": "#e8791e",
+                    "tertiary-fixed": "#cbe6ff",
+                    "surface-container-lowest": "#ffffff",
+                    "surface": "#fff8f5",
+                    "on-secondary": "#ffffff",
+                    "inverse-on-surface": "#ffede4",
+                    "on-primary-fixed-variant": "#733600",
+                    "on-secondary-container": "#6b6156",
+                    "secondary": "#665d52",
+                    "surface-tint": "#974800",
+                    "on-background": "#241913",
+                    "surface-dim": "#ead6cc",
+                    "surface-container": "#ffeadf",
+                    "tertiary-fixed-dim": "#8fcdff",
+                    "background": "#fff8f5",
+                    "outline-variant": "#ddc1b1",
+                    "secondary-container": "#ebddd0",
+                    "surface-bright": "#fff8f5",
+                    "inverse-primary": "#ffb688",
+                    "primary-fixed": "#ffdbc7",
+                    "secondary-fixed-dim": "#d1c4b7",
+                    "on-surface-variant": "#564337",
+                    "surface-container-low": "#fff1ea",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-container": "#00334e",
+                    "surface-container-high": "#f9e4d9",
+                    "outline": "#8a7265",
+                    "on-surface": "#241913",
+                    "on-error": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-padding": "20px",
+                    "md": "16px",
+                    "stack-gap": "12px",
+                    "xl": "32px",
+                    "sm": "12px",
+                    "xs": "8px",
+                    "lg": "24px",
+                    "base": "4px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Be Vietnam Pro"],
+                    "body-md": ["Be Vietnam Pro"],
+                    "headline-md": ["Be Vietnam Pro"],
+                    "body-lg": ["Be Vietnam Pro"],
+                    "label-bold": ["Be Vietnam Pro"],
+                    "label-md": ["Be Vietnam Pro"],
+                    "headline-lg-mobile": ["Be Vietnam Pro"]
+            },
+            "fontSize": {
+                    "headline-lg": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-bold": ["12px", {"lineHeight": "16px", "fontWeight": "700"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["26px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom scrollbar for clean look */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #ddc1b1; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-background text-on-surface antialiased min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky z-50 bg-surface flex items-center justify-between px-container-padding py-md shadow-sm">
+<div class="flex items-center gap-4">
+<button class="active:scale-95 transition-transform text-on-surface-variant hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md-mobile text-primary">WONA</h1>
+</div>
+<div class="flex items-center gap-xs">
+<button class="p-2 rounded-full hover:bg-secondary-container transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">search</span>
+</button>
+<button class="p-2 rounded-full hover:bg-secondary-container transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">filter_list</span>
+</button>
+</div>
+</header>
+<main class="px-container-padding py-lg">
+<!-- Dashboard Header Summary (Asymmetric Layout Hint) -->
+<div class="mb-xl">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile mb-xs text-on-background">Historique des Livraisons</h2>
+<p class="text-on-surface-variant font-body-md">Suivi chronologique de vos transactions et livraisons terminées.</p>
+</div>
+<!-- Filter Chips (Micro-interaction layer) -->
+<div class="flex gap-xs overflow-x-auto pb-md mb-md no-scrollbar">
+<button class="whitespace-nowrap px-md py-xs rounded-full bg-primary-container text-on-primary-container font-label-md">Tous les envois</button>
+<button class="whitespace-nowrap px-md py-xs rounded-full bg-secondary-container text-on-secondary-container font-label-md">Ce mois</button>
+<button class="whitespace-nowrap px-md py-xs rounded-full bg-secondary-container text-on-secondary-container font-label-md">Abidjan</button>
+<button class="whitespace-nowrap px-md py-xs rounded-full bg-secondary-container text-on-secondary-container font-label-md">Dakar</button>
+</div>
+<!-- Timeline Section -->
+<div class="space-y-stack-gap">
+<!-- Group by Date -->
+<div class="pt-sm pb-xs">
+<span class="font-label-bold text-outline uppercase tracking-wider">Aujourd'hui</span>
+</div>
+<!-- Card Item 1 -->
+<div class="bg-surface-container-low p-md rounded-xl border border-outline-variant/30 transition-transform active:scale-[0.98] cursor-pointer">
+<div class="flex justify-between items-start mb-sm">
+<div class="flex items-center gap-sm">
+<div class="w-12 h-12 rounded-full overflow-hidden border-2 border-primary-container">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a friendly delivery driver wearing a corporate orange polo shirt. He is smiling warmly against a blurred urban background with warm sunlight. The image is crisp, modern, and exudes reliability and West African urban energy." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcA0OhBFTQqZUskW93-rfQIAQruacUtR-ak1agRob5WlNOqo21h-2_tu6EazlYo1wKtb9qK6BCTB9E8L2quauUuSZWSrFw6i64sJbG4C8XBMAdyYd_QV6e8A6O0QUrkSnR_n1PMp4os3ZozLGzFTLrcbr1Yk1fApvRestr3cH32DfU6tDvffmaiYodA7wPoZArZS95BeR6Tbz0DKXwDe3llxuGOj-OrX3SoYn5Mt6bThZOPrtidf78"/>
+</div>
+<div>
+<h3 class="font-headline-md text-sm text-on-background">Moussa Traoré</h3>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-xs text-primary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-label-md text-on-surface-variant">4.9 • Coursier Gold</span>
+</div>
+</div>
+</div>
+<span class="bg-green-100 text-green-700 px-sm py-1 rounded-full text-label-bold">Terminé</span>
+</div>
+<div class="flex flex-col gap-xs mb-md border-l-2 border-dashed border-outline-variant ml-6 pl-6 relative">
+<div class="absolute -left-[5px] top-0 w-2 h-2 rounded-full bg-primary"></div>
+<div class="absolute -left-[5px] bottom-0 w-2 h-2 rounded-full bg-primary"></div>
+<div>
+<p class="text-label-md text-outline">Destination</p>
+<p class="font-body-md text-on-background">Plateau, Avenue Marchand, Abidjan</p>
+</div>
+</div>
+<div class="flex justify-between items-center pt-sm border-t border-outline-variant/20">
+<div class="flex flex-col">
+<span class="text-label-md text-outline">Date &amp; Heure</span>
+<span class="font-body-md font-semibold">14 Oct, 14:30</span>
+</div>
+<div class="text-right">
+<span class="text-label-md text-outline">Prix</span>
+<p class="font-headline-md text-primary">2,500 FCFA</p>
+</div>
+</div>
+</div>
+<!-- Group by Date 2 -->
+<div class="pt-lg pb-xs">
+<span class="font-label-bold text-outline uppercase tracking-wider">Hier</span>
+</div>
+<!-- Card Item 2 -->
+<div class="bg-surface-container-low p-md rounded-xl border border-outline-variant/30 transition-transform active:scale-[0.98] cursor-pointer">
+<div class="flex justify-between items-start mb-sm">
+<div class="flex items-center gap-sm">
+<div class="w-12 h-12 rounded-full overflow-hidden border-2 border-primary-container">
+<img class="w-full h-full object-cover" data-alt="A close-up portrait of a female delivery rider in a professional orange jacket, her motorcycle helmet tucked under one arm. She has a confident and helpful expression. The lighting is bright and natural, reflecting an outdoor African city environment. High-quality digital photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtsBptJsrK17KHvAHTAAuMNJvtBYh9o0zSn8oe1xHJukka52U242rMAT5fjyGVH3UaaQ6Z15v3L1Mp3kDM7M8Bwd-Lt8oFSXFuwVtssFhBAjdbxU0QrCZ8tFlrGznd59DJV-6m59PvC7zfyVN7IP7Ear6Br637DR6fpPsDy4qn5UKTTbE_gwIGocxP4_rGC8wgBOoBX_ihBwAz8YwVIBkVWVDEKjmXH-v9sveDrpMyvmfyT3Hlc8jH"/>
+</div>
+<div>
+<h3 class="font-headline-md text-sm text-on-background">Awa Diop</h3>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-xs text-primary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-label-md text-on-surface-variant">4.8 • Express Pro</span>
+</div>
+</div>
+</div>
+<span class="bg-green-100 text-green-700 px-sm py-1 rounded-full text-label-bold">Terminé</span>
+</div>
+<div class="flex flex-col gap-xs mb-md border-l-2 border-dashed border-outline-variant ml-6 pl-6 relative">
+<div class="absolute -left-[5px] top-0 w-2 h-2 rounded-full bg-primary"></div>
+<div class="absolute -left-[5px] bottom-0 w-2 h-2 rounded-full bg-primary"></div>
+<div>
+<p class="text-label-md text-outline">Destination</p>
+<p class="font-body-md text-on-background">Cocody Ambassades, Rue 12</p>
+</div>
+</div>
+<div class="flex justify-between items-center pt-sm border-t border-outline-variant/20">
+<div class="flex flex-col">
+<span class="text-label-md text-outline">Date &amp; Heure</span>
+<span class="font-body-md font-semibold">13 Oct, 11:15</span>
+</div>
+<div class="text-right">
+<span class="text-label-md text-outline">Prix</span>
+<p class="font-headline-md text-primary">3,800 FCFA</p>
+</div>
+</div>
+</div>
+<!-- Card Item 3 -->
+<div class="bg-surface-container-low p-md rounded-xl border border-outline-variant/30 transition-transform active:scale-[0.98] cursor-pointer">
+<div class="flex justify-between items-start mb-sm">
+<div class="flex items-center gap-sm">
+<div class="w-12 h-12 rounded-full overflow-hidden border-2 border-primary-container">
+<img class="w-full h-full object-cover" data-alt="A portrait of a male courier leaning against a white delivery van. He is wearing a modern tech-focused uniform with orange accents. He looks efficient and professional. The background shows a clean, modern street in a West African city during the golden hour. Vibrant and professional aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCABQZmzVO-l9iXi4wzErTFAtz5U18UyAXY_NKP2O1UJEzwyDqMD2sX8j8D24xhFddYjNjfgySbyqjitXjOl4P6ORfzlRUUoWt4z51g8DuTAnDKyZxYybXP_dAldFUho9Gg4SKDIZ4Ig4ujidkFNVm_-yDbYU-XvzPG880th-dNvRr3Az6WAZ5hWWRQCz6KACJPdlZXIn-uw8mRPru4Q-HaS9SQievYtcld_NWPwY4YoYDmuGpVaTTd"/>
+</div>
+<div>
+<h3 class="font-headline-md text-sm text-on-background">Koffi Kouamé</h3>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-xs text-primary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-label-md text-on-surface-variant">5.0 • Expert Van</span>
+</div>
+</div>
+</div>
+<span class="bg-green-100 text-green-700 px-sm py-1 rounded-full text-label-bold">Terminé</span>
+</div>
+<div class="flex flex-col gap-xs mb-md border-l-2 border-dashed border-outline-variant ml-6 pl-6 relative">
+<div class="absolute -left-[5px] top-0 w-2 h-2 rounded-full bg-primary"></div>
+<div class="absolute -left-[5px] bottom-0 w-2 h-2 rounded-full bg-primary"></div>
+<div>
+<p class="text-label-md text-outline">Destination</p>
+<p class="font-body-md text-on-background">Yopougon Selmer, Près du Marché</p>
+</div>
+</div>
+<div class="flex justify-between items-center pt-sm border-t border-outline-variant/20">
+<div class="flex flex-col">
+<span class="text-label-md text-outline">Date &amp; Heure</span>
+<span class="font-body-md font-semibold">13 Oct, 09:40</span>
+</div>
+<div class="text-right">
+<span class="text-label-md text-outline">Prix</span>
+<p class="font-headline-md text-primary">1,200 FCFA</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Load More / Empty State Spacer -->
+<div class="py-xl text-center">
+<button class="text-primary font-label-bold hover:underline">Afficher plus de résultats</button>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full rounded-t-xl z-50 bg-surface shadow-[0px_-4px_12px_rgba(0,0,0,0.05)] h-16 flex justify-around items-center px-4">
+<!-- Accueil -->
+<a class="flex flex-col items-center justify-center text-secondary px-4 py-1 hover:bg-secondary-container rounded-full active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-md text-label-md">Accueil</span>
+</a>
+<!-- Livraison -->
+<a class="flex flex-col items-center justify-center text-secondary px-4 py-1 hover:bg-secondary-container rounded-full active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">local_shipping</span>
+<span class="font-label-md text-label-md">Livraison</span>
+</a>
+<!-- Historique (Active) -->
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">history</span>
+<span class="font-label-md text-label-md">Historique</span>
+</a>
+</nav>
+<script>
+        // Micro-interaction for cards
+        document.querySelectorAll('.cursor-pointer').forEach(card => {
+            card.addEventListener('click', () => {
+                // Future expansion: link to detail page
+                console.log('Navigate to delivery details');
+            });
+        });
+
+        // Simple animation for the list loading
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.bg-surface-container-low');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'all 0.4s ease-out';
+                card.style.transitionDelay = `${index * 0.1}s`;
+                
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 100);
+            });
+        });
+    </script>
+</body></html>

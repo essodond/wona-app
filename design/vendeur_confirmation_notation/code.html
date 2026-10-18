@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+
+<html lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed": "#eee0d3",
+                    "tertiary-container": "#00a0ea",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-highest": "#f3dfd4",
+                    "on-tertiary-fixed-variant": "#004b71",
+                    "on-primary-fixed": "#311300",
+                    "on-tertiary-fixed": "#001e30",
+                    "tertiary": "#006494",
+                    "on-secondary-fixed": "#211a12",
+                    "inverse-surface": "#3a2e27",
+                    "on-error-container": "#93000a",
+                    "surface-variant": "#f3dfd4",
+                    "error-container": "#ffdad6",
+                    "on-primary-container": "#4f2300",
+                    "primary-fixed-dim": "#ffb688",
+                    "on-secondary-fixed-variant": "#4e453b",
+                    "error": "#ba1a1a",
+                    "primary": "#974800",
+                    "primary-container": "#e8791e",
+                    "tertiary-fixed": "#cbe6ff",
+                    "surface-container-lowest": "#ffffff",
+                    "surface": "#fff8f5",
+                    "on-secondary": "#ffffff",
+                    "inverse-on-surface": "#ffede4",
+                    "on-primary-fixed-variant": "#733600",
+                    "on-secondary-container": "#6b6156",
+                    "secondary": "#665d52",
+                    "surface-tint": "#974800",
+                    "on-background": "#241913",
+                    "surface-dim": "#ead6cc",
+                    "surface-container": "#ffeadf",
+                    "tertiary-fixed-dim": "#8fcdff",
+                    "background": "#fff8f5",
+                    "outline-variant": "#ddc1b1",
+                    "secondary-container": "#ebddd0",
+                    "surface-bright": "#fff8f5",
+                    "inverse-primary": "#ffb688",
+                    "primary-fixed": "#ffdbc7",
+                    "secondary-fixed-dim": "#d1c4b7",
+                    "on-surface-variant": "#564337",
+                    "surface-container-low": "#fff1ea",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-container": "#00334e",
+                    "surface-container-high": "#f9e4d9",
+                    "outline": "#8a7265",
+                    "on-surface": "#241913",
+                    "on-error": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-padding": "20px",
+                    "md": "16px",
+                    "stack-gap": "12px",
+                    "xl": "32px",
+                    "sm": "12px",
+                    "xs": "8px",
+                    "lg": "24px",
+                    "base": "4px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Be Vietnam Pro"],
+                    "body-md": ["Be Vietnam Pro"],
+                    "headline-md": ["Be Vietnam Pro"],
+                    "body-lg": ["Be Vietnam Pro"],
+                    "label-bold": ["Be Vietnam Pro"],
+                    "label-md": ["Be Vietnam Pro"],
+                    "headline-lg-mobile": ["Be Vietnam Pro"]
+            },
+            "fontSize": {
+                    "headline-lg": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-bold": ["12px", {"lineHeight": "16px", "fontWeight": "700"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["26px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Be Vietnam Pro', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+        }
+        .star-active { font-variation-settings: 'FILL' 1; }
+        .success-animation {
+            animation: scaleIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        @keyframes scaleIn {
+            from { transform: scale(0); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #ddc1b1; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col items-center">
+<!-- Top AppBar - Suppression of Nav Shell Logic as this is a focused confirmation screen -->
+<header class="w-full top-0 sticky bg-surface flex items-center justify-between px-container-padding py-md z-50">
+<div class="flex items-center gap-md">
+<button class="hover:opacity-80 transition-opacity active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-primary text-headline-md">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md text-primary">WONA</h1>
+</div>
+</header>
+<main class="w-full max-w-md px-container-padding flex-1 flex flex-col items-center py-xl space-y-xl">
+<!-- Confirmation Hero Section -->
+<div class="w-full flex flex-col items-center text-center space-y-md">
+<div class="success-animation relative w-32 h-32 flex items-center justify-center bg-[#E8F5E9] rounded-full border-4 border-[#4CAF50]">
+<span class="material-symbols-outlined text-[64px] text-[#4CAF50]" style="font-variation-settings: 'wght' 700;">check_circle</span>
+<!-- Subtle decorative rings -->
+<div class="absolute inset-0 border-2 border-primary-container/20 rounded-full animate-ping"></div>
+</div>
+<div class="space-y-xs">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Livré !</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-[280px]">Votre colis a été remis en mains propres par votre livreur.</p>
+</div>
+</div>
+<!-- Rating Section Bento Card -->
+<div class="w-full bg-surface-container-low rounded-xl p-md border border-outline-variant/30 shadow-sm space-y-lg">
+<!-- Driver Profile Mini-Card -->
+<div class="flex items-center gap-md bg-white p-sm rounded-lg shadow-[0px_4px_12px_rgba(0,0,0,0.05)]">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-secondary-container">
+<img class="w-full h-full object-cover" data-alt="A professional portrait of a friendly West African delivery driver wearing a bright orange uniform. He is smiling warmly at the camera, conveying trust and reliability. The background is a clean, bright city street with soft morning light and a modern logistics van partially visible, maintaining a high-end corporate but friendly aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPfCQV-g4JDNIEmqaA7FeDhxvthzQdA9w2c23_Fh_marw-SqeKlgw95SV5Ch22pjkZVPhu_lb19ZuuyyG2a-7_PAr1VYgTgv-BmRUakcctXQeD5Uo3fflAHRR0YnUtEWd7bq7acGqUt5YqL2XbbaVxFm2hz8a7gmJ9p83xqjqfq649qyh3WTKx5nLSdbbt8AhE7uHFtSIRq1UpQbdlPiHShKTcrU48ngwkazqSdSOAAhVUpQ8aTs2l"/>
+</div>
+<div class="flex-1">
+<p class="font-label-bold text-on-surface">Moussa Traoré</p>
+<p class="font-label-md text-on-surface-variant">Livraison Express • Toyota Hilux</p>
+</div>
+<div class="flex items-center gap-xs text-primary">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-bold">4.9</span>
+</div>
+</div>
+<!-- Interactive Star Rating -->
+<div class="flex flex-col items-center space-y-sm">
+<h3 class="font-label-bold text-on-surface text-body-lg">Noter le livreur</h3>
+<div class="flex gap-xs" id="star-container">
+<button class="star-btn active:scale-90 transition-transform p-1" data-value="1">
+<span class="material-symbols-outlined text-primary text-[40px] star-icon">star</span>
+</button>
+<button class="star-btn active:scale-90 transition-transform p-1" data-value="2">
+<span class="material-symbols-outlined text-primary text-[40px] star-icon">star</span>
+</button>
+<button class="star-btn active:scale-90 transition-transform p-1" data-value="3">
+<span class="material-symbols-outlined text-primary text-[40px] star-icon">star</span>
+</button>
+<button class="star-btn active:scale-90 transition-transform p-1" data-value="4">
+<span class="material-symbols-outlined text-primary text-[40px] star-icon">star</span>
+</button>
+<button class="star-btn active:scale-90 transition-transform p-1" data-value="5">
+<span class="material-symbols-outlined text-primary text-[40px] star-icon">star</span>
+</button>
+</div>
+</div>
+<!-- Comment Area -->
+<div class="space-y-xs">
+<label class="font-label-bold text-on-surface-variant ml-1" for="comment">Votre avis...</label>
+<textarea class="w-full bg-white border border-outline/20 rounded-lg p-md font-body-md focus:ring-2 focus:ring-primary-container focus:border-primary-container transition-all outline-none resize-none placeholder:text-on-surface-variant/40" id="comment" placeholder="Qu'est-ce qui s'est bien passé ?" rows="4"></textarea>
+</div>
+<!-- Quick Tags Chips -->
+<div class="flex flex-wrap gap-xs">
+<button class="px-sm py-xs bg-secondary-fixed text-on-secondary-fixed rounded-full font-label-md hover:bg-secondary-fixed-dim transition-colors">Rapide</button>
+<button class="px-sm py-xs bg-secondary-fixed text-on-secondary-fixed rounded-full font-label-md hover:bg-secondary-fixed-dim transition-colors">Courtois</button>
+<button class="px-sm py-xs bg-secondary-fixed text-on-secondary-fixed rounded-full font-label-md hover:bg-secondary-fixed-dim transition-colors">Colis soigné</button>
+</div>
+</div>
+<!-- Action Button -->
+<div class="w-full pt-md">
+<button class="w-full h-12 bg-primary-container text-white font-headline-md rounded-xl shadow-lg active:scale-95 transition-all hover:opacity-90">
+                Envoyer ma note
+            </button>
+<button class="w-full h-12 mt-sm text-primary font-label-bold rounded-xl active:scale-95 transition-all">
+                Plus tard
+            </button>
+</div>
+</main>
+<!-- Map Context Decorator (Small inset card) -->
+<div class="hidden md:block fixed right-xl top-1/2 -translate-y-1/2 w-80 h-96 rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
+<div class="w-full h-full relative">
+<img class="w-full h-full object-cover" data-location="Abidjan" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBO8ntEnGCJ4mYK7_iROmxybAziNugoUNPvMy5iSYKnsHdLBc-kuDWcUD3QjlgCJl21TnryiDUHb9QpUiyDqJ6clgmR2MEJP36ZcoY2ISqzynQLGzleWi023Js_gv1RDHn0JjX2M0HC4-I299jDc7QBs5lxNBM3D2a_O_aXRJug7zAtCV0Bw9Q6LwIhwf2BE6kPiiSh9W9TPCbKg2cyKCXBxh-se-LptIN7e6prXckFjXqLZx_oBHfM"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<div class="absolute bottom-md left-md text-white">
+<p class="font-label-bold">Détails de l'itinéraire</p>
+<p class="text-label-md opacity-80">Cocody → Marcory • 24 min</p>
+</div>
+</div>
+</div>
+<script>
+        // Simple Star Rating Micro-interaction
+        const starBtns = document.querySelectorAll('.star-btn');
+        let currentRating = 0;
+
+        starBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const value = parseInt(btn.getAttribute('data-value'));
+                currentRating = value;
+                updateStars(value);
+            });
+
+            btn.addEventListener('mouseenter', () => {
+                const value = parseInt(btn.getAttribute('data-value'));
+                updateStars(value, true);
+            });
+
+            btn.addEventListener('mouseleave', () => {
+                updateStars(currentRating);
+            });
+        });
+
+        function updateStars(value, isHover = false) {
+            starBtns.forEach((btn, index) => {
+                const starIcon = btn.querySelector('.star-icon');
+                if (index < value) {
+                    starIcon.style.fontVariationSettings = "'FILL' 1";
+                    starIcon.classList.add('text-primary');
+                } else {
+                    starIcon.style.fontVariationSettings = "'FILL' 0";
+                    if (isHover) {
+                        starIcon.classList.add('opacity-30');
+                    } else {
+                        starIcon.classList.remove('opacity-30');
+                    }
+                }
+            });
+        }
+
+        // Quick Tag Auto-Fill Logic
+        const tags = document.querySelectorAll('.bg-secondary-fixed');
+        const textarea = document.getElementById('comment');
+        tags.forEach(tag => {
+            tag.addEventListener('click', () => {
+                if (textarea.value.includes(tag.textContent)) return;
+                textarea.value += (textarea.value ? ', ' : '') + tag.textContent;
+                tag.classList.toggle('bg-primary-container');
+                tag.classList.toggle('text-white');
+            });
+        });
+    </script>
+</body></html>

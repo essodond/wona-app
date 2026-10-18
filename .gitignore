@@ -1,0 +1,59 @@
+# Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
+
+# dependencies
+node_modules/
+.npm-cache/
+
+# Expo
+.expo/
+dist/
+web-build/
+expo-env.d.ts
+
+# Native
+.kotlin/
+*.orig.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+
+# Metro
+.metro-health-check*
+
+# debug
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+
+# macOS
+.DS_Store
+*.pem
+
+# local env files
+.env*.local
+.env
+
+# Django
+wona-backend/.venv/
+wona-backend/venv/
+wona-backend/.pip-cache/
+wona-backend/.wheelhouse/
+wona-backend/.local-test-deps/
+wona-backend/db.sqlite3
+wona-backend/media/
+wona-backend/staticfiles/
+wona-backend/.env
+
+# Admin portal
+admin-web/.next/
+admin-web/.npm-cache/
+admin-web/.dev.vars
+
+# typescript
+*.tsbuildinfo
+
+# generated native folders
+/ios
+/android

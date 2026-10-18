@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Suivi de Livraison - WONA</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Load Tailwind Config -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed": "#eee0d3",
+                    "tertiary-container": "#00a0ea",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-highest": "#f3dfd4",
+                    "on-tertiary-fixed-variant": "#004b71",
+                    "on-primary-fixed": "#311300",
+                    "on-tertiary-fixed": "#001e30",
+                    "tertiary": "#006494",
+                    "on-secondary-fixed": "#211a12",
+                    "inverse-surface": "#3a2e27",
+                    "on-error-container": "#93000a",
+                    "surface-variant": "#f3dfd4",
+                    "error-container": "#ffdad6",
+                    "on-primary-container": "#4f2300",
+                    "primary-fixed-dim": "#ffb688",
+                    "on-secondary-fixed-variant": "#4e453b",
+                    "error": "#ba1a1a",
+                    "primary": "#974800",
+                    "primary-container": "#e8791e",
+                    "tertiary-fixed": "#cbe6ff",
+                    "surface-container-lowest": "#ffffff",
+                    "surface": "#fff8f5",
+                    "on-secondary": "#ffffff",
+                    "inverse-on-surface": "#ffede4",
+                    "on-primary-fixed-variant": "#733600",
+                    "on-secondary-container": "#6b6156",
+                    "secondary": "#665d52",
+                    "surface-tint": "#974800",
+                    "on-background": "#241913",
+                    "surface-dim": "#ead6cc",
+                    "surface-container": "#ffeadf",
+                    "tertiary-fixed-dim": "#8fcdff",
+                    "background": "#fff8f5",
+                    "outline-variant": "#ddc1b1",
+                    "secondary-container": "#ebddd0",
+                    "surface-bright": "#fff8f5",
+                    "inverse-primary": "#ffb688",
+                    "primary-fixed": "#ffdbc7",
+                    "secondary-fixed-dim": "#d1c4b7",
+                    "on-surface-variant": "#564337",
+                    "surface-container-low": "#fff1ea",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-container": "#00334e",
+                    "surface-container-high": "#f9e4d9",
+                    "outline": "#8a7265",
+                    "on-surface": "#241913",
+                    "on-error": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-padding": "20px",
+                    "md": "16px",
+                    "stack-gap": "12px",
+                    "xl": "32px",
+                    "sm": "12px",
+                    "xs": "8px",
+                    "lg": "24px",
+                    "base": "4px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Be Vietnam Pro"],
+                    "body-md": ["Be Vietnam Pro"],
+                    "headline-md": ["Be Vietnam Pro"],
+                    "body-lg": ["Be Vietnam Pro"],
+                    "label-bold": ["Be Vietnam Pro"],
+                    "label-md": ["Be Vietnam Pro"],
+                    "headline-lg-mobile": ["Be Vietnam Pro"]
+            },
+            "fontSize": {
+                    "headline-lg": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-bold": ["12px", {"lineHeight": "16px", "fontWeight": "700"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["26px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Be Vietnam Pro', sans-serif; background-color: #fff8f5; overflow: hidden; }
+        .map-canvas { height: 100vh; width: 100vw; position: fixed; top: 0; left: 0; z-index: 0; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        
+        /* Smooth Entrance for Bottom Sheet */
+        .bottom-sheet-animation {
+            animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes slideUp {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+
+        /* Pulsing dot for motorcycle location */
+        .pulse-circle {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            70% { transform: scale(2.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 0; }
+        }
+
+        /* Simple float animation for motorcycle */
+        .moto-float {
+            animation: motoMoving 3s ease-in-out infinite;
+        }
+        @keyframes motoMoving {
+            0%, 100% { transform: translate(0, 0) rotate(-5deg); }
+            50% { transform: translate(10px, -5px) rotate(5deg); }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background">
+<!-- TOP APP BAR (from JSON blueprint) -->
+<header class="w-full top-0 sticky z-50 flex items-center justify-between px-container-padding py-md bg-surface dark:bg-on-background">
+<button class="active:scale-95 transition-transform hover:opacity-80 transition-opacity flex items-center justify-center p-2 rounded-full">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md-mobile text-primary dark:text-primary-fixed-dim">Suivi</h1>
+<button class="active:scale-95 transition-transform hover:opacity-80 transition-opacity flex items-center justify-center p-2 rounded-full">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim">help_outline</span>
+</button>
+</header>
+<!-- FULLSCREEN MAP CONTAINER -->
+<main class="relative h-screen w-full">
+<!-- Mock Map Visuals -->
+<div class="map-canvas bg-surface-container-low" data-location="Dakar, Senegal" style="">
+<!-- Simulated Map Image -->
+<div class="w-full h-full bg-cover bg-center grayscale-[0.3] contrast-[0.9]" data-alt="A high-quality top-down 3D map rendering of a vibrant West African city landscape with clean streets, palm trees, and modern buildings. The visual style is minimalist and clean, utilizing a warm color palette of soft oranges and sandy beiges to match the WONA brand. Clear route lines are visible connecting two points in a professional logistics app interface." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBnjH-8DXywXWlxMeC7j9Vbg3qFlwX6cR2I39UQz67YeDFwJiBLBRB9LDRN2wAvw0gl814x_fC3PeZMj6L4_bH-EQtPrlcrhytNKBSqaLMFXYnA4-q5-UotvcCo305rcXoQRsEt3T4P3lDCMy0-4xzSlJ9Ztr1NO0dy4D_dymAr3XhBgGEfjeyyxtW6rnxfAGwfz_cnNRTmOK7MH6IjY0B3jOXEMxeXN3x_AQaF_obHty-RCQbrIwQu')">
+</div>
+<!-- Route Overlay (Visual Representation) -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none" viewbox="0 0 400 800">
+<!-- Path -->
+<path d="M 100 600 Q 200 450 300 300" fill="none" opacity="0.4" stroke="#974800" stroke-dasharray="8 6" stroke-width="4"></path>
+<!-- Destination Marker -->
+<g transform="translate(300, 300)">
+<circle cx="0" cy="0" fill="#974800" r="8"></circle>
+<circle class="pulse-circle" cx="0" cy="0" fill="#974800" opacity="0.2" r="16"></circle>
+<foreignobject height="40" width="120" x="-20" y="-60">
+<div class="bg-on-surface text-surface text-[10px] px-2 py-1 rounded-lg shadow-md font-bold">Arrivée</div>
+</foreignobject>
+</g>
+<!-- Moto Icon (Moving) -->
+<g class="moto-float" transform="translate(180, 480)">
+<circle class="shadow-lg" cx="0" cy="0" fill="#e8791e" r="22"></circle>
+<foreignobject height="24" width="24" x="-12" y="-12">
+<span class="material-symbols-outlined text-white text-[20px]" data-weight="fill">motorcycle</span>
+</foreignobject>
+</g>
+</svg>
+</div>
+<!-- FLOATING ETA BADGE -->
+<div class="absolute top-8 left-1/2 -translate-x-1/2 z-10">
+<div class="bg-primary-container text-on-primary-container px-6 py-3 rounded-full shadow-lg flex items-center gap-2 border-2 border-white/20 backdrop-blur-md">
+<span class="material-symbols-outlined text-[20px]">schedule</span>
+<span class="font-headline-md text-headline-md">8 min</span>
+<span class="font-label-md text-label-md opacity-80 border-l border-on-primary-container/20 pl-2">1.4 km</span>
+</div>
+</div>
+<!-- BOTTOM SHEET: Driver Info & Actions -->
+<div class="fixed bottom-0 left-0 w-full z-40 px-4 pb-8 bottom-sheet-animation">
+<div class="bg-surface rounded-[24px] shadow-[0px_-8px_24px_rgba(0,0,0,0.12)] p-lg max-w-lg mx-auto border border-surface-container-highest">
+<!-- Handle -->
+<div class="w-12 h-1.5 bg-outline-variant rounded-full mx-auto mb-lg opacity-40"></div>
+<div class="flex items-center justify-between gap-md">
+<!-- Driver Profile -->
+<div class="flex items-center gap-md">
+<div class="relative">
+<div class="w-16 h-16 rounded-2xl bg-cover bg-center border-2 border-primary-container overflow-hidden" data-alt="A professional portrait of a friendly West African delivery driver wearing a branded orange polo shirt. He is smiling warmly, conveying trust and reliability. The lighting is soft and professional with a clean, blurred urban background that emphasizes his face and the professional uniform of the delivery service." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCdv1HHc_Q9a7UXEKZon5lmQdb9hbiaKnsa3HY8GsON2btaOy4nV4TFgqM8FWn29vORynPuKaiARco6Pt5rTQK7EdL8yl1mSd7wwmWZ4C466d6tOceJec4U_CcCoeBZrHxqwIjXFIyD0WvWqOGUx8YL9pqiB4iWB_0ni6C0O9Dn6awDF1iWO6al11Q8da35Mp_c5Kd2oJBly4ok3EX1NVHl7Ud6avoEtAiWdtJ8SoF-5oYZAnDLk-iI')">
+</div>
+<div class="absolute -bottom-1 -right-1 bg-green-500 w-4 h-4 rounded-full border-2 border-white"></div>
+</div>
+<div>
+<h3 class="font-headline-md text-on-surface">Moussa Diop</h3>
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-bold text-label-bold">4.9 • Moto Express</span>
+</div>
+</div>
+</div>
+<!-- Communication Actions -->
+<div class="flex gap-sm">
+<button class="w-12 h-12 rounded-xl bg-surface-container-high flex items-center justify-center text-primary active:scale-90 transition-all">
+<span class="material-symbols-outlined">chat_bubble</span>
+</button>
+<button class="w-12 h-12 rounded-xl bg-primary-container text-white flex items-center justify-center active:scale-90 transition-all shadow-md">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">call</span>
+</button>
+</div>
+</div>
+<!-- Status Progress -->
+<div class="mt-lg pt-lg border-t border-surface-variant flex flex-col gap-sm">
+<div class="flex justify-between items-center mb-1">
+<span class="font-label-bold text-label-bold text-secondary uppercase tracking-wider">Statut</span>
+<span class="bg-primary/10 text-primary px-3 py-1 rounded-full font-label-bold text-[10px]">EN ROUTE</span>
+</div>
+<div class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary-container w-[75%] rounded-full shadow-[0_0_8px_rgba(232,121,30,0.4)]"></div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant italic">Le livreur approche de votre position.</p>
+</div>
+<!-- Order Detail Quick View -->
+<div class="mt-lg bg-surface-container-low p-md rounded-xl flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-white rounded-lg">
+<span class="material-symbols-outlined text-secondary">inventory_2</span>
+</div>
+<div>
+<p class="font-label-bold text-label-bold text-on-surface">Commande #WN-9021</p>
+<p class="font-label-md text-label-md text-secondary">Livraison Repas • Plateau</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</div>
+</div>
+</div>
+</main>
+<!-- INVISIBLE NAVIGATION SHELL LOGIC -->
+<!-- (Suppressed as per "Task-Focused" exclusion rule in instructions: Tracking is a focused sub-page) -->
+<script>
+        // Micro-interactions for buttons
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const icon = this.querySelector('.material-symbols-outlined');
+                if(icon) {
+                    icon.classList.add('scale-110');
+                    setTimeout(() => icon.classList.remove('scale-110'), 200);
+                }
+            });
+        });
+
+        // Simple script to simulate a small movement of the moto marker
+        const moto = document.querySelector('.moto-float');
+        let moveX = 180;
+        let moveY = 480;
+        
+        setInterval(() => {
+            moveX += (Math.random() - 0.4) * 0.5;
+            moveY -= (Math.random() * 0.4);
+            if (moto) {
+                // We keep the animation class but adjust the base transform
+                // (Note: in a real app, this would be GPS coordinates)
+            }
+        }, 100);
+    </script>
+</body></html>

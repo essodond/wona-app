@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+exec "/c/Program Files/nodejs/node.exe" "/c/Program Files/nodejs/node_modules/npm/bin/npm-cli.js" "$@"

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>WONA - Vérification OTP</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed": "#eee0d3",
+                    "tertiary-container": "#00a0ea",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-highest": "#f3dfd4",
+                    "on-tertiary-fixed-variant": "#004b71",
+                    "on-primary-fixed": "#311300",
+                    "on-tertiary-fixed": "#001e30",
+                    "tertiary": "#006494",
+                    "on-secondary-fixed": "#211a12",
+                    "inverse-surface": "#3a2e27",
+                    "on-error-container": "#93000a",
+                    "surface-variant": "#f3dfd4",
+                    "error-container": "#ffdad6",
+                    "on-primary-container": "#4f2300",
+                    "primary-fixed-dim": "#ffb688",
+                    "on-secondary-fixed-variant": "#4e453b",
+                    "error": "#ba1a1a",
+                    "primary": "#974800",
+                    "primary-container": "#e8791e",
+                    "tertiary-fixed": "#cbe6ff",
+                    "surface-container-lowest": "#ffffff",
+                    "surface": "#fff8f5",
+                    "on-secondary": "#ffffff",
+                    "inverse-on-surface": "#ffede4",
+                    "on-primary-fixed-variant": "#733600",
+                    "on-secondary-container": "#6b6156",
+                    "secondary": "#665d52",
+                    "surface-tint": "#974800",
+                    "on-background": "#241913",
+                    "surface-dim": "#ead6cc",
+                    "surface-container": "#ffeadf",
+                    "tertiary-fixed-dim": "#8fcdff",
+                    "background": "#fff8f5",
+                    "outline-variant": "#ddc1b1",
+                    "secondary-container": "#ebddd0",
+                    "surface-bright": "#fff8f5",
+                    "inverse-primary": "#ffb688",
+                    "primary-fixed": "#ffdbc7",
+                    "secondary-fixed-dim": "#d1c4b7",
+                    "on-surface-variant": "#564337",
+                    "surface-container-low": "#fff1ea",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-container": "#00334e",
+                    "surface-container-high": "#f9e4d9",
+                    "outline": "#8a7265",
+                    "on-surface": "#241913",
+                    "on-error": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-padding": "20px",
+                    "md": "16px",
+                    "stack-gap": "12px",
+                    "xl": "32px",
+                    "sm": "12px",
+                    "xs": "8px",
+                    "lg": "24px",
+                    "base": "4px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Be Vietnam Pro"],
+                    "body-md": ["Be Vietnam Pro"],
+                    "headline-md": ["Be Vietnam Pro"],
+                    "body-lg": ["Be Vietnam Pro"],
+                    "label-bold": ["Be Vietnam Pro"],
+                    "label-md": ["Be Vietnam Pro"],
+                    "headline-lg-mobile": ["Be Vietnam Pro"]
+            },
+            "fontSize": {
+                    "headline-lg": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-bold": ["12px", {"lineHeight": "16px", "fontWeight": "700"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["26px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body { font-family: 'Be Vietnam Pro', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        .otp-input:focus {
+            border-color: #974800;
+            box-shadow: 0 0 0 2px rgba(151, 72, 0, 0.1);
+        }
+        .numpad-key:active {
+            transform: scale(0.92);
+            background-color: #ebddd0;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen flex flex-col items-center">
+<!-- TopAppBar Navigation (Suppressed per Rules: Transactional Screen) -->
+<header class="w-full top-0 sticky bg-surface flex items-center justify-between px-container-padding py-md z-50">
+<button class="text-primary hover:opacity-80 transition-opacity active:scale-95 transition-transform" onclick="history.back()">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<span class="font-headline-md text-headline-md-mobile text-primary">WONA</span>
+<div class="w-6"></div> <!-- Spacer -->
+</header>
+<main class="flex-1 w-full max-w-md px-container-padding flex flex-col pt-lg">
+<!-- Illustration Section -->
+<div class="mb-xl flex justify-center">
+<div class="w-24 h-24 bg-primary-container/10 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-[48px] text-primary" style="font-variation-settings: 'FILL' 1;">sms</span>
+</div>
+</div>
+<!-- Title & Instruction -->
+<div class="text-center mb-xl">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-background mb-base">Vérifiez votre code</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                Nous avons envoyé un code de vérification à 6 chiffres au <span class="font-bold text-on-surface">+225 •• •• •• 89</span>.
+            </p>
+</div>
+<!-- OTP Input Fields -->
+<div class="flex justify-between gap-xs mb-lg" id="otp-container">
+<input class="otp-input w-12 h-14 text-center text-headline-md font-headline-md bg-surface-container rounded-xl border border-outline/20 focus:outline-none transition-all" maxlength="1" readonly="" type="number"/>
+<input class="otp-input w-12 h-14 text-center text-headline-md font-headline-md bg-surface-container rounded-xl border border-outline/20 focus:outline-none transition-all" maxlength="1" readonly="" type="number"/>
+<input class="otp-input w-12 h-14 text-center text-headline-md font-headline-md bg-surface-container rounded-xl border border-outline/20 focus:outline-none transition-all" maxlength="1" readonly="" type="number"/>
+<input class="otp-input w-12 h-14 text-center text-headline-md font-headline-md bg-surface-container rounded-xl border border-outline/20 focus:outline-none transition-all" maxlength="1" readonly="" type="number"/>
+<input class="otp-input w-12 h-14 text-center text-headline-md font-headline-md bg-surface-container rounded-xl border border-outline/20 focus:outline-none transition-all" maxlength="1" readonly="" type="number"/>
+<input class="otp-input w-12 h-14 text-center text-headline-md font-headline-md bg-surface-container rounded-xl border border-outline/20 focus:outline-none transition-all" maxlength="1" readonly="" type="number"/>
+</div>
+<!-- Resend Section -->
+<div class="text-center mb-xl">
+<p class="font-label-md text-label-md text-on-surface-variant">
+                Vous n'avez pas reçu de code ?
+                <button class="text-primary font-label-bold ml-1 hover:underline active:opacity-70 transition-all" id="resend-btn">Renvoyer le code</button>
+</p>
+<p class="font-label-md text-label-md text-outline mt-1" id="timer">Attendez 00:59</p>
+</div>
+<!-- Verify Button -->
+<button class="w-full h-14 bg-primary-container text-on-primary-container font-headline-md rounded-xl shadow-[0px_4px_12px_rgba(232,121,30,0.3)] active:scale-[0.98] transition-all flex items-center justify-center gap-sm" id="verify-btn">
+<span>Vérifier</span>
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</main>
+<!-- Custom Numeric Keypad -->
+<div class="w-full bg-surface-container-low px-container-padding pt-md pb-xl mt-auto border-t border-outline/5 select-none">
+<div class="grid grid-cols-3 gap-y-4 max-w-md mx-auto">
+<div class="numpad-key flex items-center justify-center h-14 rounded-xl text-headline-md cursor-pointer transition-all" onclick="addNumber(1)">1</div>
+<div class="numpad-key flex items-center justify-center h-14 rounded-xl text-headline-md cursor-pointer transition-all" onclick="addNumber(2)">2</div>
+<div class="numpad-key flex items-center justify-center h-14 rounded-xl text-headline-md cursor-pointer transition-all" onclick="addNumber(3)">3</div>
+<div class="numpad-key flex items-center justify-center h-14 rounded-xl text-headline-md cursor-pointer transition-all" onclick="addNumber(4)">4</div>
+<div class="numpad-key flex items-center justify-center h-14 rounded-xl text-headline-md cursor-pointer transition-all" onclick="addNumber(5)">5</div>
+<div class="numpad-key flex items-center justify-center h-14 rounded-xl text-headline-md cursor-pointer transition-all" onclick="addNumber(6)">6</div>
+<div class="numpad-key flex items-center justify-center h-14 rounded-xl text-headline-md cursor-pointer transition-all" onclick="addNumber(7)">7</div>
+<div class="numpad-key flex items-center justify-center h-14 rounded-xl text-headline-md cursor-pointer transition-all" onclick="addNumber(8)">8</div>
+<div class="numpad-key flex items-center justify-center h-14 rounded-xl text-headline-md cursor-pointer transition-all" onclick="addNumber(9)">9</div>
+<div class="flex items-center justify-center h-14"></div>
+<div class="numpad-key flex items-center justify-center h-14 rounded-xl text-headline-md cursor-pointer transition-all" onclick="addNumber(0)">0</div>
+<div class="numpad-key flex items-center justify-center h-14 rounded-xl text-on-surface-variant cursor-pointer transition-all" onclick="deleteNumber()">
+<span class="material-symbols-outlined">backspace</span>
+</div>
+</div>
+</div>
+<script>
+        const inputs = document.querySelectorAll('.otp-input');
+        const verifyBtn = document.getElementById('verify-btn');
+        let currentIdx = 0;
+
+        function addNumber(num) {
+            if (currentIdx < inputs.length) {
+                inputs[currentIdx].value = num;
+                inputs[currentIdx].classList.add('border-primary', 'bg-surface-bright');
+                currentIdx++;
+                checkCompletion();
+            }
+        }
+
+        function deleteNumber() {
+            if (currentIdx > 0) {
+                currentIdx--;
+                inputs[currentIdx].value = '';
+                inputs[currentIdx].classList.remove('border-primary', 'bg-surface-bright');
+                checkCompletion();
+            }
+        }
+
+        function checkCompletion() {
+            const isComplete = Array.from(inputs).every(input => input.value !== '');
+            if (isComplete) {
+                verifyBtn.classList.remove('opacity-50');
+                verifyBtn.disabled = false;
+            } else {
+                verifyBtn.classList.add('opacity-50');
+                verifyBtn.disabled = true;
+            }
+        }
+
+        // Timer Logic
+        let seconds = 59;
+        const timerEl = document.getElementById('timer');
+        const resendBtn = document.getElementById('resend-btn');
+
+        const countdown = setInterval(() => {
+            if (seconds > 0) {
+                seconds--;
+                timerEl.innerText = `Attendez 00:${seconds < 10 ? '0' : ''}${seconds}`;
+                resendBtn.style.opacity = '0.5';
+                resendBtn.style.pointerEvents = 'none';
+            } else {
+                timerEl.innerText = '';
+                resendBtn.style.opacity = '1';
+                resendBtn.style.pointerEvents = 'auto';
+                clearInterval(countdown);
+            }
+        }, 1000);
+
+        // Verification Logic
+        verifyBtn.addEventListener('click', () => {
+            const code = Array.from(inputs).map(i => i.value).join('');
+            verifyBtn.innerHTML = `<span class="animate-spin material-symbols-outlined">sync</span>`;
+            
+            // Simulation
+            setTimeout(() => {
+                if(code === "123456") {
+                    verifyBtn.innerHTML = `<span class="material-symbols-outlined">check_circle</span>`;
+                    verifyBtn.classList.replace('bg-primary-container', 'bg-green-600');
+                    alert("Code vérifié avec succès !");
+                } else {
+                    verifyBtn.innerHTML = `Vérifier`;
+                    inputs.forEach(i => i.classList.add('border-error'));
+                    setTimeout(() => inputs.forEach(i => i.classList.remove('border-error')), 2000);
+                }
+            }, 1500);
+        });
+
+        // Initialize button state
+        checkCompletion();
+    </script>
+</body></html>

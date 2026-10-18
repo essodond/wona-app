@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>WONA - Abonnements</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed": "#eee0d3",
+                    "tertiary-container": "#00a0ea",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-highest": "#f3dfd4",
+                    "on-tertiary-fixed-variant": "#004b71",
+                    "on-primary-fixed": "#311300",
+                    "on-tertiary-fixed": "#001e30",
+                    "tertiary": "#006494",
+                    "on-secondary-fixed": "#211a12",
+                    "inverse-surface": "#3a2e27",
+                    "on-error-container": "#93000a",
+                    "surface-variant": "#f3dfd4",
+                    "error-container": "#ffdad6",
+                    "on-primary-container": "#4f2300",
+                    "primary-fixed-dim": "#ffb688",
+                    "on-secondary-fixed-variant": "#4e453b",
+                    "error": "#ba1a1a",
+                    "primary": "#974800",
+                    "primary-container": "#e8791e",
+                    "tertiary-fixed": "#cbe6ff",
+                    "surface-container-lowest": "#ffffff",
+                    "surface": "#fff8f5",
+                    "on-secondary": "#ffffff",
+                    "inverse-on-surface": "#ffede4",
+                    "on-primary-fixed-variant": "#733600",
+                    "on-secondary-container": "#6b6156",
+                    "secondary": "#665d52",
+                    "surface-tint": "#974800",
+                    "on-background": "#241913",
+                    "surface-dim": "#ead6cc",
+                    "surface-container": "#ffeadf",
+                    "tertiary-fixed-dim": "#8fcdff",
+                    "background": "#fff8f5",
+                    "outline-variant": "#ddc1b1",
+                    "secondary-container": "#ebddd0",
+                    "surface-bright": "#fff8f5",
+                    "inverse-primary": "#ffb688",
+                    "primary-fixed": "#ffdbc7",
+                    "secondary-fixed-dim": "#d1c4b7",
+                    "on-surface-variant": "#564337",
+                    "surface-container-low": "#fff1ea",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-container": "#00334e",
+                    "surface-container-high": "#f9e4d9",
+                    "outline": "#8a7265",
+                    "on-surface": "#241913",
+                    "on-error": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-padding": "20px",
+                    "md": "16px",
+                    "stack-gap": "12px",
+                    "xl": "32px",
+                    "sm": "12px",
+                    "xs": "8px",
+                    "lg": "24px",
+                    "base": "4px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Be Vietnam Pro"],
+                    "body-md": ["Be Vietnam Pro"],
+                    "headline-md": ["Be Vietnam Pro"],
+                    "body-lg": ["Be Vietnam Pro"],
+                    "label-bold": ["Be Vietnam Pro"],
+                    "label-md": ["Be Vietnam Pro"],
+                    "headline-lg-mobile": ["Be Vietnam Pro"]
+            },
+            "fontSize": {
+                    "headline-lg": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-bold": ["12px", {"lineHeight": "16px", "fontWeight": "700"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["26px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Be Vietnam Pro', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .subscription-card {
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .subscription-card:active {
+            transform: scale(0.98);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface min-h-screen pb-24">
+<!-- Top Navigation Bar -->
+<header class="w-full top-0 sticky z-50 bg-surface dark:bg-on-background flex items-center justify-between px-container-padding py-md">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary active:scale-95 transition-transform cursor-pointer" data-icon="arrow_back">arrow_back</span>
+<h1 class="font-headline-md text-headline-md-mobile text-primary dark:text-primary-fixed-dim">Abonnements</h1>
+</div>
+<div class="font-headline-md text-headline-md text-primary dark:text-primary-fixed-dim">WONA</div>
+</header>
+<main class="px-container-padding pt-lg space-y-lg">
+<!-- Header Section -->
+<div class="text-center space-y-xs">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Choisissez votre plan</h2>
+<p class="font-body-md text-body-md text-on-surface-variant px-md">Profitez d'une expérience de livraison optimisée et de services exclusifs.</p>
+</div>
+<!-- Comparison Section -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<!-- Standard Plan -->
+<div class="subscription-card bg-white border border-outline-variant/30 rounded-xl p-md flex flex-col justify-between shadow-[0px_4px_12px_rgba(0,0,0,0.05)] relative overflow-hidden">
+<div class="space-y-sm">
+<div class="flex justify-between items-start">
+<div>
+<span class="font-label-bold text-label-bold text-secondary uppercase tracking-wider">Plan actuel</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Standard</h3>
+</div>
+<div class="text-right">
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-primary">2500 F</span>
+<p class="font-label-md text-label-md text-on-surface-variant">/ mois</p>
+</div>
+</div>
+<div class="h-[1px] bg-outline-variant/20 w-full"></div>
+<ul class="space-y-stack-gap py-sm">
+<li class="flex items-center gap-xs font-body-md text-body-md text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-[18px]" data-icon="check_circle">check_circle</span>
+                            Suivi en temps réel
+                        </li>
+<li class="flex items-center gap-xs font-body-md text-body-md text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-[18px]" data-icon="check_circle">check_circle</span>
+                            Support standard 24/7
+                        </li>
+<li class="flex items-center gap-xs font-body-md text-body-md text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-[18px]" data-icon="check_circle">check_circle</span>
+                            3 livraisons prioritaires / mois
+                        </li>
+</ul>
+</div>
+<button class="w-full mt-lg bg-primary-container text-on-primary font-headline-md py-md rounded-lg active:scale-95 transition-all duration-200 shadow-sm">
+                    S'abonner
+                </button>
+</div>
+<!-- Premium Plan -->
+<div class="subscription-card bg-surface-container border-2 border-primary-container rounded-xl p-md flex flex-col justify-between shadow-lg relative overflow-hidden">
+<!-- Premium Badge Background Glow -->
+<div class="absolute -top-12 -right-12 w-32 h-32 bg-primary-container/10 rounded-full blur-3xl"></div>
+<div class="space-y-sm relative">
+<div class="flex justify-between items-start">
+<div class="space-y-base">
+<div class="flex items-center gap-xs">
+<h3 class="font-headline-md text-headline-md text-on-surface">Premium</h3>
+<span class="bg-primary text-white flex items-center gap-1 px-2 py-0.5 rounded-full shadow-sm">
+<span class="material-symbols-outlined text-[14px]" data-icon="verified" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="font-label-bold text-[10px] uppercase">Vérifié</span>
+</span>
+</div>
+<span class="font-label-bold text-label-bold text-primary-container uppercase tracking-wider">Recommandé</span>
+</div>
+<div class="text-right">
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-primary">5000 F</span>
+<p class="font-label-md text-label-md text-on-surface-variant">/ mois</p>
+</div>
+</div>
+<div class="h-[1px] bg-primary-container/20 w-full"></div>
+<ul class="space-y-stack-gap py-sm">
+<li class="flex items-center gap-xs font-body-md text-body-md text-on-surface">
+<span class="material-symbols-outlined text-primary text-[18px]" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-semibold">Tout le plan Standard</span>
+</li>
+<li class="flex items-center gap-xs font-body-md text-body-md text-on-surface">
+<span class="material-symbols-outlined text-primary text-[18px]" data-icon="check_circle">check_circle</span>
+                            Livraisons gratuites illimitées
+                        </li>
+<li class="flex items-center gap-xs font-body-md text-body-md text-on-surface">
+<span class="material-symbols-outlined text-primary text-[18px]" data-icon="check_circle">check_circle</span>
+                            Assurance premium incluse
+                        </li>
+<li class="flex items-center gap-xs font-body-md text-body-md text-on-surface">
+<span class="material-symbols-outlined text-primary text-[18px]" data-icon="check_circle">check_circle</span>
+                            Gestionnaire de compte dédié
+                        </li>
+</ul>
+</div>
+<button class="w-full mt-lg bg-primary-container text-on-primary font-headline-md py-md rounded-lg active:scale-95 transition-all duration-200 shadow-md">
+                    S'abonner
+                </button>
+</div>
+</div>
+<!-- Decorative Info Card -->
+<div class="bg-secondary-container/30 rounded-xl p-md border border-dashed border-outline mt-xl">
+<div class="flex gap-md items-center">
+<div class="bg-primary-container p-sm rounded-full">
+<span class="material-symbols-outlined text-white" data-icon="info">info</span>
+</div>
+<div class="flex-1">
+<p class="font-label-bold text-on-secondary-container">Information flexible</p>
+<p class="font-body-md text-body-md text-on-secondary-container">Changez de forfait à tout moment. Pas d'engagement de durée.</p>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full rounded-t-xl z-50 bg-surface dark:bg-on-background shadow-[0px_-4px_12px_rgba(0,0,0,0.05)] flex justify-around items-center h-16 w-full px-4">
+<div class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim px-4 py-1 hover:bg-secondary-container dark:hover:bg-secondary-fixed-dim/10 rounded-full active:scale-90 transition-all duration-200 cursor-pointer">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-md text-label-md">Accueil</span>
+</div>
+<div class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim px-4 py-1 hover:bg-secondary-container dark:hover:bg-secondary-fixed-dim/10 rounded-full active:scale-90 transition-all duration-200 cursor-pointer">
+<span class="material-symbols-outlined" data-icon="local_shipping">local_shipping</span>
+<span class="font-label-md text-label-md">Livraison</span>
+</div>
+<div class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim px-4 py-1 hover:bg-secondary-container dark:hover:bg-secondary-fixed-dim/10 rounded-full active:scale-90 transition-all duration-200 cursor-pointer">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span class="font-label-md text-label-md">Historique</span>
+</div>
+</nav>
+<script>
+        // Simple micro-interaction for cards
+        document.querySelectorAll('.subscription-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.classList.add('shadow-xl');
+            });
+            card.addEventListener('mouseleave', () => {
+                card.classList.remove('shadow-xl');
+            });
+        });
+
+        // Activation simulation for buttons
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const originalText = this.innerText;
+                this.innerText = 'Chargement...';
+                this.disabled = true;
+                this.classList.add('opacity-80');
+                
+                setTimeout(() => {
+                    this.innerText = originalText;
+                    this.disabled = false;
+                    this.classList.remove('opacity-80');
+                }, 1500);
+            });
+        });
+    </script>
+</body></html>
